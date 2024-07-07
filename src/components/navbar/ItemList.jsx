@@ -9,7 +9,7 @@ const ItemList = ({productos, titulo}) => {
       <h2 className="main-title">{toCapital(titulo)}</h2>
       <div className="productos">
         {
-            productos && productos.map((producto) => <Item producto={producto} key={producto.id}/>)
+            productos && productos.map((producto) => <Item producto={producto} key={producto.id} idCategoria={producto.category} />)
         }
       </div>
     </div>

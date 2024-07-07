@@ -1,7 +1,6 @@
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import { collection, getDocs, query, where } from "firebase/firestore";
-import { db } from "../firebase/Config";
+
 import ItemList from "./ItemList";
 import "./styles.css";
 
@@ -9,27 +8,30 @@ const ItemListContainer = () => {
   const [titulo, setTitulo] = useState("Productos");
   const [productos, setProductos] = useState([]);
   const { categoria } = useParams();
-
+console.log(categoria)
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const productosRef = collection(db, "productos");
-        let q;
+        let url = `https://pro.dna.netlatin.net.ar/endpoints/E-Commerce/get_all_productos_por_categoria.php`;
 
+        // Construir la URL con el parámetro de categoría si existe
         if (categoria) {
-          q = query(productosRef, where("categoria", "==", categoria));
-          setTitulo(categoria)
+          url += `?categoria=${categoria}`;
+          setTitulo(categoria);
         } else {
-            q = query(productosRef); // Sin filtro de categoría
-            
+          setTitulo('Todos los productos');
         }
-        console.log(categoria)
-        const resp = await getDocs(q);
-        setProductos(
-          resp.docs.map((doc) => ({ ...doc.data(), id: doc.id }))
-        );
+
+        console.log(`Fetching data from: ${url}`);
+
+        const response = await fetch(url);
+        if (!response.ok) {
+          throw new Error(`Error: ${response.statusText}`);
+        }
+        const data = await response.json();
+        setProductos(data);  // Asumiendo que `data` es un array de productos
       } catch (error) {
-        console.error("Error al obtener los documentos: ", error);
+        console.error('Error al obtener los documentos:', error);
       }
     };
 

@@ -12,7 +12,7 @@ function Navbar() {
             {/* <li className='menu-link'><Link to="/productos/Pantalones">Pantalones</Link></li>
             <li className='menu-link'><Link to="/productos/Technology">Technology</Link></li>
             <li className='menu-link'><Link to="/productos/Public Utilities">Public Utilities</Link></li>*/}
-            <li className='menu-link'><Link to="/productos/Buzos">Buzos</Link></li> 
+            <li className='menu-link'><Link to="/productos/Electronico">Electronico</Link></li> 
             <li className='menu-link'><Link to="/productos/Pantalones">Nosotros</Link></li>
             <li className='menu-link'><Link to="/contacto">Contacto</Link></li>
             <li><CartWitdge /></li>

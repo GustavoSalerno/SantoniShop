@@ -1,47 +1,54 @@
 import { createContext, useEffect, useState } from "react";
 
-
 export const CartContext = createContext();
 
-const carritoInicial = JSON.parse(localStorage.getItem("carrito") )|| [] ;
-export const CartProvider = ({children}) => {
-    const [carrito, setCarrito] = useState(carritoInicial)
+const carritoInicial = JSON.parse(localStorage.getItem("carrito")) || [];
+export const CartProvider = ({ children }) => {
+  const [carrito, setCarrito] = useState(carritoInicial);
 
- 
-    const agregarAlCarrito = (item,cantidad) => {
-      const itemAgregado = { ...item, cantidad };
-      const nuevoCarrito = [...carrito];
-      const estaEnElCarro = nuevoCarrito.find(
-        (producto) => producto.id === itemAgregado.id
-      );
-      if (estaEnElCarro) {
-        estaEnElCarro.cantidad  += cantidad;
-      } else {
-        // setCarrito([...carrito, itemAgregado]);
-        nuevoCarrito.push(itemAgregado)
-      }
-      setCarrito(nuevoCarrito);
-    };
+  const agregarAlCarrito = (item, cantidad) => {
+    const itemAgregado = { ...item, cantidad };
+    const nuevoCarrito = [...carrito];
+    const estaEnElCarro = nuevoCarrito.find(
+      (producto) => producto.id === itemAgregado.id
+    );
+    if (estaEnElCarro) {
+      estaEnElCarro.cantidad += cantidad;
+    } else {
+      // setCarrito([...carrito, itemAgregado]);
+      nuevoCarrito.push(itemAgregado);
+    }
+    setCarrito(nuevoCarrito);
+  };
 
-    useEffect(() => {
-        localStorage.setItem("carrito", JSON.stringify(carrito))
-    }, [carrito]);
-  
-    const cantidadEnCarrito = () =>{
-      return carrito.reduce((acumulador,prod) => acumulador + prod.cantidad,0)
-    }
-    const precioTotal = () =>{
-      return carrito.reduce((acumulador,prod) => acumulador + prod.precio * prod.cantidad,0)
-    }
-    const vaciarCarrito = () =>{
-      setCarrito([])
-    }
+  useEffect(() => {
+    localStorage.setItem("carrito", JSON.stringify(carrito));
+  }, [carrito]);
 
-    return  <CartContext.Provider value={{carrito ,
-     agregarAlCarrito,
-      cantidadEnCarrito ,
-     precioTotal,
-     vaciarCarrito}}>
-        {children}
+  const cantidadEnCarrito = () => {
+    return carrito.reduce((acumulador, prod) => acumulador + prod.cantidad, 0);
+  };
+  const precioTotal = () => {
+    return carrito.reduce(
+      (acumulador, prod) => acumulador + prod.precio * prod.cantidad,
+      0
+    );
+  };
+  const vaciarCarrito = () => {
+    setCarrito([]);
+  };
+
+  return (
+    <CartContext.Provider
+      value={{
+        carrito,
+        agregarAlCarrito,
+        cantidadEnCarrito,
+        precioTotal,
+        vaciarCarrito,
+      }}
+    >
+      {children}
     </CartContext.Provider>
-}
+  );
+};
