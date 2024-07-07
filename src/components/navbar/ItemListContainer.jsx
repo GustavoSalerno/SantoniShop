@@ -18,8 +18,10 @@ const ItemListContainer = () => {
 
         if (categoria) {
           q = query(productosRef, where("categoria", "==", categoria));
+          setTitulo(categoria)
         } else {
-          q = query(productosRef); // Sin filtro de categoría
+            q = query(productosRef); // Sin filtro de categoría
+            
         }
         console.log(categoria)
         const resp = await getDocs(q);
