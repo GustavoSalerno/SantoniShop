@@ -1,0 +1,227 @@
+[
+  {
+    "id": 1,
+    "titulo": "Luxottica Group, S.p.A.",
+    "descripcion": "Ophthalmic Goods",
+    "categoria": "Pantalones",
+    "imagen": "http://dummyimage.com/157x100.png/cc0000/ffffff",
+    "precio": 0.69,
+    "stock": 250
+  },
+  {
+    "id": 2,
+    "titulo": "PIMCO Strategic Income Fund, Inc.",
+    "descripcion": "Pantalones",
+    "categoria": "Pantalones",
+    "imagen": "http://dummyimage.com/162x100.png/5fa2dd/ffffff",
+    "precio": 1.30,
+    "stock": 10
+  },
+  {
+    "id": 3,
+    "titulo": "Dynex Capital, Inc.",
+    "descripcion": "n/a",
+    "categoria": "n/a",
+    "imagen": "http://dummyimage.com/215x100.png/ff4444/ffffff",
+    "precio": 1.01,
+    "stock": 10
+  },
+  {
+    "id": 4,
+    "titulo": "Cleveland BioLabs, Inc.",
+    "descripcion": "Biotechnology: Commercial Physical & Biological Resarch",
+    "categoria": "Health Care",
+    "imagen": "http://dummyimage.com/143x100.png/5fa2dd/ffffff",
+    "precio": 2.23,
+    "stock": 10
+  },
+  {
+    "id": 5,
+    "titulo": "Kayne Anderson MLP Investment Company",
+"descripcion": "Pantalones",
+    "categoria": "Pantalones",
+    "imagen": "http://dummyimage.com/210x100.png/5fa2dd/ffffff",
+    "precio": 2.20,
+    "stock": 10
+  },
+  {
+    "id": 6,
+    "titulo": "Tailored Brands, Inc.",
+    "descripcion": "Clothing/Shoe/Accessory Stores",
+    "categoria": "Consumer Services",
+    "imagen": "http://dummyimage.com/183x100.png/ff4444/ffffff",
+    "precio": 9.28,
+    "stock": 10
+  },
+  {
+    "id": 7,
+    "titulo": "Nuveen Preferred and Income 2022 Term Fund",
+"descripcion": "Pantalones",
+    "categoria": "Pantalones",
+    "imagen": "http://dummyimage.com/122x100.png/dddddd/000000",
+    "precio": 0.70,
+    "stock": 10
+  },
+  {
+    "id": 8,
+    "titulo": "Willis Towers Watson Public Limited Company",
+    "descripcion": "Specialty Insurers",
+    "categoria": "Finance",
+    "imagen": "http://dummyimage.com/178x100.png/ff4444/ffffff",
+    "precio": 8.14,
+    "stock": 10
+  },
+  {
+    "id": 9,
+    "titulo": "iShares MSCI USA ESG Optimized ETF",
+    "descripcion": "n/a",
+    "categoria": "n/a",
+    "imagen": "http://dummyimage.com/195x100.png/5fa2dd/ffffff",
+    "precio": 8.35,
+    "stock": 10
+  },
+  {
+    "id": 10,
+    "titulo": "Progressive Corporation (The)",
+    "descripcion": "Property-Casualty Insurers",
+    "categoria": "Finance",
+    "imagen": "http://dummyimage.com/214x100.png/5fa2dd/ffffff",
+    "precio": 2.35,
+    "stock": 10
+  },
+  {
+    "id": 11,
+    "titulo": "Mattel, Inc.",
+    "descripcion": "Recreational Products/Toys",
+    "categoria": "Consumer Non-Durables",
+    "imagen": "http://dummyimage.com/125x100.png/cc0000/ffffff",
+    "precio": 3.44,
+    "stock": 10
+  },
+  {
+    "id": 12,
+    "titulo": "P & F Industries, Inc.",
+    "descripcion": "Industrial Machinery/Components",
+    "categoria": "Technology",
+    "imagen": "http://dummyimage.com/117x100.png/ff4444/ffffff",
+    "precio": 0.88,
+    "stock": 10
+  },
+  {
+    "id": 13,
+    "titulo": "Intevac, Inc.",
+    "descripcion": "Industrial Machinery/Components",
+    "categoria": "Technology",
+    "imagen": "http://dummyimage.com/206x100.png/5fa2dd/ffffff",
+    "precio": 6.79,
+    "stock": 10
+  },
+  {
+    "id": 14,
+    "titulo": "AECOM",
+    "descripcion": "Military/Government/Technical",
+    "categoria": "Consumer Services",
+    "imagen": "http://dummyimage.com/141x100.png/5fa2dd/ffffff",
+    "precio": 3.23,
+    "stock": 10
+  },
+  {
+    "id": 15,
+    "titulo": "Mercury General Corporation",
+    "descripcion": "Property-Casualty Insurers",
+    "categoria": "Finance",
+    "imagen": "http://dummyimage.com/100x100.png/ff4444/ffffff",
+    "precio": 7.91,
+    "stock": 10
+  },
+  {
+    "id": 16,
+    "titulo": "Taubman Centers, Inc.",
+    "descripcion": "Real Estate Investment Trusts",
+    "categoria": "Consumer Services",
+    "imagen": "http://dummyimage.com/236x100.png/dddddd/000000",
+    "precio": 3.04,
+    "stock": 10
+  },
+  {
+    "id": 17,
+    "titulo": "Westport Fuel Systems Inc",
+    "descripcion": "Industrial Machinery/Components",
+    "categoria": "Energy",
+    "imagen": "http://dummyimage.com/156x100.png/ff4444/ffffff",
+    "precio": 8.94,
+    "stock": 10
+  },
+  {
+    "id": 18,
+    "titulo": "Instructure, Inc.",
+    "descripcion": "Computer Software: Prepackaged Software",
+    "categoria": "Technology",
+    "imagen": "http://dummyimage.com/178x100.png/dddddd/000000",
+    "precio": 3.76,
+    "stock": 10
+  },
+  {
+    "id": 19,
+    "titulo": "Blueknight Energy Partners L.P., L.L.C.",
+    "descripcion": "Natural Gas Distribution",
+    "categoria": "Energy",
+    "imagen": "http://dummyimage.com/175x100.png/dddddd/000000",
+    "precio": 6.18,
+    "stock": 10
+  },
+  {
+    "id": 20,
+    "titulo": "Western Alliance Bancorporation",
+    "descripcion": "Major Banks",
+    "categoria": "Finance",
+    "imagen": "http://dummyimage.com/185x100.png/5fa2dd/ffffff",
+    "precio": 2.71,
+    "stock": 10
+  },
+  {
+    "id": 21,
+    "titulo": "PTC Inc.",
+    "descripcion": "Computer Software: Prepackaged Software",
+    "categoria": "Technology",
+    "imagen": "http://dummyimage.com/102x100.png/5fa2dd/ffffff",
+    "precio": 6.31,
+    "stock": 10
+  },
+  {
+    "id": 22,
+    "titulo": "Essendant Inc.",
+    "descripcion": "Paper",
+    "categoria": "Consumer Services",
+    "imagen": "http://dummyimage.com/125x100.png/cc0000/ffffff",
+    "precio": 0.44,
+    "stock": 10
+  },
+  {
+    "id": 23,
+    "titulo": "WPP plc",
+    "descripcion": "Advertising",
+    "categoria": "Technology",
+    "imagen": "http://dummyimage.com/171x100.png/5fa2dd/ffffff",
+    "precio": 6.15,
+    "stock": 10
+  },
+  {
+    "id": 24,
+    "titulo": "Mitek Systems, Inc.",
+    "descripcion": "Computer peripheral equipment",
+    "categoria": "Technology",
+    "imagen": "http://dummyimage.com/243x100.png/ff4444/ffffff",
+    "precio": 7.12,
+    "stock": 10
+  },
+  {
+    "id": 25,
+    "titulo": "Empresa Distribuidora Y Comercializadora Norte S.A. (Edenor)",
+    "descripcion": "Electric Utilities: Central",
+    "categoria": "Public Utilities",
+    "imagen": "http://dummyimage.com/233x100.png/5fa2dd/ffffff",
+    "precio": 0.61,
+    "stock": 10
+  }
+]
