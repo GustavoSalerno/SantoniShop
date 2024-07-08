@@ -19,7 +19,7 @@ const Myp = () => {
 
   // const nombres = ['cristian' , 'leon', 'noah'];
   // const nombres2 = nombres.map((nombre) => nombre +1);
-  // console.log(nombres2)
+  // //console.log(nombres2)
 
   return (
     <div>

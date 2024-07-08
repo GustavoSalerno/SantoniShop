@@ -1,9 +1,9 @@
 import Item from "./Item"
 import { toCapital } from "../helpers/toCapital"
 
-
+import './itemlist.css'
 const ItemList = ({productos, titulo}) => {
-  console.log(productos)
+  //console.log(productos)
     return (
     <div className="container">
       <h2 className="main-title">{toCapital(titulo)}</h2>

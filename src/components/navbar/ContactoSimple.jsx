@@ -3,14 +3,14 @@ import React, { useState } from "react";
 export const Contacto = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log("enviado");
+    //console.log("enviado");
   };
 const [nombre, setNombre] = useState('');
   const [email, setEmail] = useState('');
   
   const handleNombre = (e) => {
     setNombre(e.target.value) //accedo al valor del formulario
-    console.log(nombre)
+    //console.log(nombre)
   }
   const handleEmail = (e) => {
     setEmail(e.target.value)

@@ -15,6 +15,7 @@ import ContactoAvanzado from "./components/navbar/ContactoAvanzado";
 import {  CartProvider } from "./components/context/CartContext";
 import Carrito from "./components/navbar/Carrito";
 import Checkout from "./components/navbar/Checkout";
+import Aside from "./components/navbar/aside/Aside";
 // import { Contacto } from "./components/navbar/ContactoSimple";
 function App() {
 
@@ -25,11 +26,13 @@ function App() {
       <BrowserRouter>
 
         <Navbar />
+        {/* <Aside /> */}
       <Routes>
         <Route path='/' element={<ItemListContainer />} />
         <Route path='/item/:id' element={<ItemDetailContainer itemId={6} />}/>
         <Route path='/productos'element={<ItemListContainer />} />
-        <Route path='/productos/:categoria'element={<ItemListContainer />} />
+        <Route path='/productos/:idcategoria'element={<ItemListContainer />} />
+        <Route path='/productos/:idcategoria?:subcategorias'element={<ItemListContainer />} />
         <Route path='/nosotros'element={<Nosotros />} />
         {/* <Route path='/contacto'element={<ContactoIntermedio />} /> */}
         <Route path='/contacto'element={<ContactoAvanzado />} />

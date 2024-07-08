@@ -22,7 +22,7 @@ function PokemonList() {
   const handlePrevious = () => {
     setUrl(next);
   };
-console.log(listaActual.results)
+//console.log(listaActual.results)
   return (
     <div>
       {listaActual.results && (

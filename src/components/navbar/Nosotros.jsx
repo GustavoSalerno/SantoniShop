@@ -7,7 +7,7 @@ const Nosotros = () => {
         let count = 0;
         const clicky = () => {
             count += 1;
-            console.log(count)
+            //console.log(count)
           }
         window.addEventListener('click',clicky )
         return () => window.removeEventListener('click',clicky)

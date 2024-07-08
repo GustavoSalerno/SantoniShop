@@ -17,7 +17,7 @@ import React, { useState } from 'react'
     }
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log("enviado", valores);
+    //console.log("enviado", valores);
   };
     return (
         <div className="container">

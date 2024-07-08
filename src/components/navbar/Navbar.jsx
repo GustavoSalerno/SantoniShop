@@ -1,24 +1,24 @@
-import React from 'react'
-import './styles.css'
-import { Link } from 'react-router-dom'
-import CartWitdge from './CartWitdge'
+// import React, { useState, useEffect } from 'react';
+import './styles.css';
+import { Link } from 'react-router-dom';
+import CartWitdge from './CartWitdge';
+
 function Navbar() {
+
+
   return (
-    <nav className='navbar' style={{marginBottom: '15px'}}>
-        <Link href="/" className='logo'><h1>SantoniShop</h1></Link>
-        <ul className='menu'>
-            <li className='menu-link'><Link to="/">inicio</Link></li>
-            <li className='menu-link'><Link to="/productos">productos</Link></li>
-            {/* <li className='menu-link'><Link to="/productos/Pantalones">Pantalones</Link></li>
-            <li className='menu-link'><Link to="/productos/Technology">Technology</Link></li>
-            <li className='menu-link'><Link to="/productos/Public Utilities">Public Utilities</Link></li>*/}
-            <li className='menu-link'><Link to="/productos/Electronico">Electronico</Link></li> 
-            <li className='menu-link'><Link to="/productos/Pantalones">Nosotros</Link></li>
-            <li className='menu-link'><Link to="/contacto">Contacto</Link></li>
-            <li><CartWitdge /></li>
-        </ul>
+    <nav className='navbar' style={{ marginBottom: '15px' }}>
+      <Link to="/" className='logo'><h1>SantoniShop</h1></Link>
+      <ul className='menu'>
+        <li className='menu-link'><Link to="/">Inicio</Link></li>
+        <li className='menu-link'><Link to="/productos">Productos</Link></li>
+     
+        <li className='menu-link'><Link to="/nosotros">Nosotros</Link></li>
+        <li className='menu-link'><Link to="/contacto">Contacto</Link></li>
+        <li><CartWitdge /></li>
+      </ul>
     </nav>
-  )
+  );
 }
 
-export default Navbar
+export default Navbar;

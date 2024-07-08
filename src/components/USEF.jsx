@@ -9,12 +9,12 @@ const handleText = (e) =>{
 }
 
 useEffect(()=>{
-    console.log("componente montado")
+    //console.log("componente montado")
 },[text]);
 useEffect(()=>{
-    console.log("componente montado")
+    //console.log("componente montado")
     return () => {
-        console.log('Componente Desmontado')
+        //console.log('Componente Desmontado')
     }
 });
 

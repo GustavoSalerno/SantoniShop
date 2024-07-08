@@ -1,0 +1,30 @@
+.categories-aside {
+    padding: 15px;
+    background-color: #f8f8f8;
+    border: 1px solid #ddd;
+    margin: 15px 0;
+  }
+  
+  .categories-aside h2 {
+    font-size: 1.5em;
+    margin-bottom: 10px;
+  }
+  
+  .categories-aside ul {
+    list-style: none;
+    padding: 0;
+  }
+  
+  .categories-aside ul li {
+    margin: 5px 0;
+  }
+  
+  .categories-aside ul li .category-link {
+    text-decoration: none;
+    color: #333;
+  }
+  
+  .categories-aside ul li .category-link:hover {
+    text-decoration: underline;
+  }
+  

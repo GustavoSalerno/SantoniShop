@@ -18,7 +18,7 @@ function Pokemon() {
   const handleAfter = () => {
     setId(id + 1);
   };
-  console.log(id);
+  //console.log(id);
   return (
     <div>
       {pokemon && (

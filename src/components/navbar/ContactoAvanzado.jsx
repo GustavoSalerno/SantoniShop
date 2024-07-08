@@ -8,12 +8,12 @@ import {useForm } from 'react-hook-form'
 const ContactoAvanzado = () => {
     // const handleSubmit = (e) => {
     //     e.preventDefault();
-    //     console.log("enviado");
+    //     //console.log("enviado");
     //   };
 const {register, handleSubmit} = useForm();
 
 const enviar = (data) => {
-    console.log(data)
+    //console.log(data)
 }
   return (
     <div className="container">
