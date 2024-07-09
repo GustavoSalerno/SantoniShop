@@ -2,13 +2,12 @@ import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 
 import ItemList from "./ItemList";
-import "../../App.css";
 
 const ItemListContainer = () => {
   const [titulo, setTitulo] = useState("Productos");
   const [productos, setProductos] = useState([]);
   const { idcategoria } = useParams();
-//console.log(idcategoria)
+console.log(idcategoria)
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -21,7 +20,7 @@ const ItemListContainer = () => {
           setTitulo('Todos los productos');
         }
 
-        //console.log(`Fetching data from: ${url}`);
+        console.log(`Fetching data from: ${url}`);
 
         const response = await fetch(url);
         if (!response.ok) {
@@ -38,7 +37,7 @@ const ItemListContainer = () => {
   }, [idcategoria]);
 
   return (
-    <div>
+    <div style={{marginLeft: '16%', maxWidth:'100%'}}>
       <ItemList productos={productos} titulo={titulo} />
     </div>
   );

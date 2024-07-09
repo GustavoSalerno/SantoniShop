@@ -15,11 +15,11 @@
   /* Productos container */
   .productos {
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
+    grid-template-columns: repeat(5, 1fr);
     gap: 2rem;
     padding-block: 2rem;
     margin: 0 auto;
-    max-width: 900px;
+    max-width: 1200px;
   }
   
   /* Producto card */
@@ -29,7 +29,7 @@
     border-radius: 1rem;
     box-shadow: 0 4px 8px rgba(224, 5, 5, 0.1);
     overflow: hidden; /* Para asegurar que las esquinas de las imágenes se redondeen */
-    background-color: var(--clr-main-light);
+    /* background-color: var(--clr-main-light); */
     transition: transform 0.3s ease;
   }
   

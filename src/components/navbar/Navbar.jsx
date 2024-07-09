@@ -1,13 +1,13 @@
 // import React, { useState, useEffect } from 'react';
-import './styles.css';
+import './navbar.css';
 import { Link } from 'react-router-dom';
-import CartWitdge from './CartWitdge';
+import CartWitdge from './cartwidtge/CartWitdge';
 
 function Navbar() {
 
 
   return (
-    <nav className='navbar' style={{ marginBottom: '15px' }}>
+    <nav className='navbar' style={{ textDecoration: 'none' ,marginBottom: '15px' }}>
       <Link to="/" className='logo'><h1>SantoniShop</h1></Link>
       <ul className='menu'>
         <li className='menu-link'><Link to="/">Inicio</Link></li>

@@ -1,5 +1,5 @@
-import Item from "./Item"
-import { toCapital } from "../helpers/toCapital"
+import Item from "../item/Item"
+import { toCapital } from "../../helpers/toCapital"
 
 import './itemlist.css'
 const ItemList = ({productos, titulo}) => {
@@ -9,7 +9,7 @@ const ItemList = ({productos, titulo}) => {
       <h2 className="main-title">{toCapital(titulo)}</h2>
       <div className="productos">
         {
-            productos && productos.map((producto) => <Item producto={producto} key={producto.id} idCategoria={producto.category} />)
+            productos && productos.map((producto) => <Item producto={producto} key={producto.id} idCategoria={producto.category} stock ={producto.stock}/>)
         }
       </div>
     </div>

@@ -1,10 +1,10 @@
 import { useContext, useEffect, useState } from "react";
-import ItemCount from "./ItemCount";
-import { CartContext } from "../context/CartContext";
-import ItemListContainer from "./ItemListContainer";
+import ItemCount from "../itemCount/ItemCount";
+import { CartContext } from "../../context/CartContext";
+import ItemListContainer from "../itemList/ItemListContainer";
 import './itemdetail.css';
-import { fetchProductById } from "../utils/endpoints";
-import { ImageCarousel } from "./carousel/ImageCarousel";
+import { fetchProductById } from "../../utils/endpoints";
+import {ImageCarousel}  from "../carousel/ImageCarousel";
 
 const ItemDetail = ({ item }) => {
   const [cantidad, setCantidad] = useState(1);
@@ -57,6 +57,7 @@ const ItemDetail = ({ item }) => {
   };
 
   const formattedDescription = formatDescription(item.productdescription);
+console.log(`/${item.id}/${item.productimage1}`)
 
   return (
     <div>
@@ -81,8 +82,8 @@ const ItemDetail = ({ item }) => {
           <div className="product-details-info">
             <h2 className="product-name">{item.productname}</h2>
             <p className="product-price">
-              <span className="product-price-original">${item.originalPrice}</span>
-              <span className="product-price-discounted">${item.productprice}</span>
+              <span className="product-price-original">{item.originalPrice}</span>
+              <span className="product-price-discounted">{item.productprice}</span>
             </p>
             <p className="product-availability">Availability: In Stock</p>
             <div className="details-text">
@@ -110,7 +111,7 @@ const ItemDetail = ({ item }) => {
       <br />
       <br />
       <br />
-      <ImageCarousel  /> 
+      <ImageCarousel /> 
       <br />
       <br />
       <ItemListContainer />

@@ -1,6 +1,7 @@
-import React, { useState, useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
-import './styles.css';
+import './Aside.css';
+import 'bootstrap/dist/css/bootstrap.min.css';
 
 const Aside = () => {
   const [categorias, setCategorias] = useState([]);
@@ -42,31 +43,30 @@ const Aside = () => {
       };
 
       fetchSubCategorias();
-    } else {
-      setSubCategorias([]);
     }
   }, [categoriaSeleccionada]);
-//console.log(subCategorias)
+  
+console.log(categoriaSeleccionada)
   return (
     <aside className="categories-aside">
       <h2>Categorías</h2>
-      <ul>
+      <ul className="list-group">
         {categorias.map((categoria) => (
           <li 
             key={categoria.id} 
-            className='category-link'
+            className={`list-group-item ${categoriaSeleccionada === categoria.id ? 'active' : ''}`}
             onClick={() => setCategoriaSeleccionada(categoria.id)}
           >
             <Link to={`/productos/${categoria.id}`}>{categoria.categoryname}</Link>
           </li>
         ))}
       </ul>
-      {categoriaSeleccionada &&  (
+      {categoriaSeleccionada && (
         <div className="subcategories">
           <h3>Subcategorías</h3>
-          <ul>
+          <ul className="list-group">
             {subCategorias.map((subCategoria) => (
-              <li key={subCategoria.id} className='subcategory-link'>
+              <li key={subCategoria.id} className='list-group-item'>
                 <Link to={`/productos/${subCategoria.id}`}>{subCategoria.subcategory}</Link>
               </li>
             ))}

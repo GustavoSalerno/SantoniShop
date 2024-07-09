@@ -1,0 +1,55 @@
+/* styles.css */
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 20px;
+    background-color: #33333a;
+    text-decoration: none;
+  }
+  
+  .logo h1 {
+    font-size: 24px;
+    margin: 0;
+    color: white; /* Asegura que el logo también sea blanco */
+    text-decoration: none;
+  }
+  
+  .menu {
+    list-style: none;
+    display: flex;
+    align-items: center;
+    margin: 0;
+    padding: 0;
+  }
+  
+  .menu-link {
+    margin-right: 20px;
+  }
+  
+  .menu-link a {
+    color: white;
+    text-decoration: none;
+    font-size: 16px; /* Ajusta el tamaño de la fuente según tus necesidades */
+  }
+  
+  .menu-link a:hover {
+    color: #ffeb3b; /* Cambia el color al pasar el ratón por encima, ajusta según prefieras */
+  }
+  
+  .cart-widget {
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+  }
+  
+  .cart-widget a {
+    color: white;
+    text-decoration: none;
+    font-size: 16px; /* Ajusta el tamaño de la fuente según tus necesidades */
+  }
+  
+  li {
+    color: white;
+  }
+  

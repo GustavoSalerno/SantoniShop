@@ -1,0 +1,39 @@
+.categories-aside {
+  background-color: #e0f7fa; /* Fondo azul claro */
+  color: #00796b; /* Texto turquesa oscuro */
+  padding: 20px;
+  width: 15%;
+  position: relative;
+ 
+  height: 100%;
+  overflow-y: auto;
+  box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
+}
+
+.categories-aside h2, .categories-aside h3 {
+  color: #004d40;
+}
+
+.categories-aside .list-group-item {
+  background-color: #b2ebf2;
+  border: none;
+  cursor: pointer;
+}
+
+.categories-aside .list-group-item:hover {
+  background-color: #80deea;
+}
+
+.categories-aside .list-group-item.active {
+  background-color: #4dd0e1;
+  color: white;
+}
+
+.categories-aside .list-group-item a {
+  text-decoration: none;
+  color: inherit;
+}
+
+.categories-aside .subcategories {
+  margin-top: 20px;
+}
