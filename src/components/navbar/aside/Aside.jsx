@@ -46,7 +46,7 @@ const Aside = () => {
     }
   }, [categoriaSeleccionada]);
   
-console.log(categoriaSeleccionada)
+
   return (
     <aside className="categories-aside">
       <h2>Categorías</h2>

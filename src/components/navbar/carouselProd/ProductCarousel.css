@@ -1,0 +1,31 @@
+/* ProductCarousel.css */
+.product-carousel {
+  width: 100%;
+  background-color: #f5f5f5;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.product-carousel h2 {
+  font-size: 30px;
+  color: #333;
+  margin-bottom: 20px;
+}
+
+.product-carousel-container {
+  display: flex;
+  overflow-x: scroll;
+  scrollbar-width: none;
+  padding: 1px;
+}
+
+.product-carousel-container::-webkit-scrollbar {
+  display: none;
+}
+
+.product-carousel-item {
+  flex: 0 0 20%; /* Para mostrar 5 productos por vista */
+  box-sizing: border-box;
+  padding: 0 10px;
+}

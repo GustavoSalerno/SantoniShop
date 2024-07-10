@@ -2,12 +2,13 @@ import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 
 import ItemList from "./ItemList";
+import ProductCarousel from "../carouselProd/ProductCarousel";
 
 const ItemListContainer = () => {
   const [titulo, setTitulo] = useState("Productos");
   const [productos, setProductos] = useState([]);
   const { idcategoria } = useParams();
-console.log(idcategoria)
+
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -37,8 +38,10 @@ console.log(idcategoria)
   }, [idcategoria]);
 
   return (
-    <div style={{marginLeft: '16%', maxWidth:'100%'}}>
+    <div >
+  
       <ItemList productos={productos} titulo={titulo} />
+
     </div>
   );
 };

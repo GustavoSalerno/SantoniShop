@@ -5,12 +5,44 @@ import ItemListContainer from "../itemList/ItemListContainer";
 import './itemdetail.css';
 import { fetchProductById } from "../../utils/endpoints";
 import {ImageCarousel}  from "../carousel/ImageCarousel";
+import ProductCarousel from "../carouselProd/ProductCarousel";
 
 const ItemDetail = ({ item }) => {
   const [cantidad, setCantidad] = useState(1);
   const { agregarAlCarrito } = useContext(CartContext);
   const [selectedImage, setSelectedImage] = useState('');
   const [nombreCat, setNombreCategoria] = useState('');
+  const [titulo, setTitulo] = useState("Productos");
+  const idSubCategoria = item.subcategory;
+  const [productos, setProductos] = useState([]);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        let url = `https://pro.dna.netlatin.net.ar/endpoints/E-Commerce/get_all_productos_por_subCategoria.php`;
+
+        // Construir la URL con el parámetro de categoría si existe
+        if (idSubCategoria) {
+          url += `?categoria=${idSubCategoria}`;
+        } else {
+          setTitulo('Todos los productos');
+        }
+
+        console.log(`Fetching data from: ${url}`);
+
+        const response = await fetch(url);
+        if (!response.ok) {
+          throw new Error(`Error: ${response.statusText}`);
+        }
+        const data = await response.json();
+        setProductos(data); // Asumiendo que `data` es un array de productos
+      } catch (error) {
+        console.error('Error al obtener los documentos:', error);
+      }
+    };
+
+    fetchData();
+  }, [idSubCategoria]);
 
   useEffect(() => {
     if (item.productimage1) {
@@ -34,7 +66,7 @@ const ItemDetail = ({ item }) => {
 
   const imagePath = (image) => `../../assets/productimages/${item.id}/${image}`;
 
-  const idCategoria = item.category;
+  const idCategoria = item.subcategory;
   useEffect(() => {
     const loadProduct = async () => {
       try {
@@ -57,7 +89,6 @@ const ItemDetail = ({ item }) => {
   };
 
   const formattedDescription = formatDescription(item.productdescription);
-console.log(`/${item.id}/${item.productimage1}`)
 
   return (
     <div>
@@ -111,8 +142,13 @@ console.log(`/${item.id}/${item.productimage1}`)
       <br />
       <br />
       <br />
+      <div style={{width: '100%'}}>
       <ImageCarousel /> 
+      </div>
       <br />
+      {productos &&
+        <ProductCarousel productos={productos} titulo={titulo}/>
+      }
       <br />
       <ItemListContainer />
     </div>

@@ -7,9 +7,9 @@ function Navbar() {
 
 
   return (
-    <nav className='navbar' style={{ textDecoration: 'none' ,marginBottom: '15px' }}>
-      <Link to="/" className='logo'><h1>SantoniShop</h1></Link>
-      <ul className='menu'>
+    <nav className='navbar' >
+      <Link to="/" className='logo' ><h1 >Casa Santoni</h1></Link>
+      <ul className='menu' >
         <li className='menu-link'><Link to="/">Inicio</Link></li>
         <li className='menu-link'><Link to="/productos">Productos</Link></li>
      

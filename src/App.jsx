@@ -17,6 +17,7 @@ import Carrito from "./components/navbar/Carrito";
 import Checkout from "./components/navbar/Checkout";
 import Aside from "./components/navbar/aside/Aside";
 import './App.css'
+import { ImageCarousel } from "./components/navbar/carousel/ImageCarousel";
 
 // import { Contacto } from "./components/navbar/ContactoSimple";
 function App() {
@@ -28,8 +29,10 @@ function App() {
       <BrowserRouter>
 
         <Navbar />
+        <ImageCarousel />
         <div className="main-layout">
-      <Aside />
+      
+      {/* <Aside /> */}
       <div className="main-content">
       <Routes>
         <Route path='/' element={<ItemListContainer />} />
