@@ -10,8 +10,8 @@ const ItemCart = ({ carrito }) => {
   const {eliminarDelCarrito } = useContext(CartContext);
   return (
     <div className="cart-items-container">
-      {carrito && carrito.length > 0 ? (
-        carrito.map((producto, index) => (
+    {carrito && carrito.length > 0 ? (
+      carrito.map((producto, index) => (
           <div key={index} className="producto">
             <div className="producto-image-container">
               <img src={`../../assets/productimages/${producto.id}/${producto.productimage1}`} alt={producto.productname} />
@@ -22,10 +22,12 @@ const ItemCart = ({ carrito }) => {
               </Link>
               <p className="producto-price">Precio: ${producto.productprice}</p>
               <div className="producto-actions">
-              <button onClick={() => eliminarDelCarrito(producto.id)}>Eliminar</button>
+              <button className='action-btn' onClick={() => eliminarDelCarrito(producto.id)}>Eliminar</button>
 
                 <button className="action-btn">Guardar</button>
+                <Link to={'/checkout'} >
                 <button className="action-btn">Comprar ahora</button>
+                </Link>
                 <div className="product-quantity-container">
                   <button className="quantity-btn">-</button>
                   <p>{producto.cantidad}</p>

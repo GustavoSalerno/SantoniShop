@@ -17,7 +17,7 @@ const Carrito = () => {
         <ItemCart carrito={carrito} /> 
         <h2>Precio Total: $ {precioTotal()} </h2>
       <button className="btn btn-primary" onClick={handleVaciar}>Vaciar</button>
-      <Link to="/checkout"> <button  className="btn btn-primary"> Finalizar Compra </button></Link>
+      <Link to="/checkout"> <button className="btn btn-primary"> Finalizar Compra </button></Link>
       </> :
       <h2>El Carrito esta vacio</h2>
       }

@@ -20,12 +20,21 @@ function Navbar() {
       navigate(`/search/${searchQuery}`);
     }
   };
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
 
+  const toggleMenu = () => {
+    setIsMenuOpen(!isMenuOpen);
+  }
   return (
     <nav className='navbar'>
       <Link to="/" className='logo'>
         <img src={Logo} alt="logo" className="navbar-logo" />
       </Link>
+      <div className='hamburger' onClick={toggleMenu}>
+        <div></div>
+        <div></div>
+        <div></div>
+      </div>
       <form className='search-bar' onSubmit={handleSearchSubmit}>
         <input
           type="text"
@@ -36,7 +45,7 @@ function Navbar() {
         />
         <button type="submit" className='search-button'>Buscar</button>
       </form>
-      <ul className='menu'>
+      <ul className={`menu ${isMenuOpen ? 'active' : ''}`}>
         <li className='menu-link'><Link to="/">Inicio</Link></li>
         <li className='menu-link'><Link to="/productos">Productos</Link></li>
         <li className="menu-link">

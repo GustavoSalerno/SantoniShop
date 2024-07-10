@@ -1,4 +1,18 @@
-/* Productos */
+/* Variables */
+:root {
+  --clr-main: #c56cee;
+  --clr-main-light: #f3eaff;
+}
+
+/* General styles */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: sans-serif;
+}
+
+/* Productos container */
 .productos {
   display: grid;
   grid-template-columns: repeat(5, minmax(206px, 1fr));
@@ -12,7 +26,6 @@
   flex-direction: column;
   border-radius: 0.5rem;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
-  /* width: 200px; */
   background-color: rgb(255, 255, 255);
   padding: 1rem;
   transition: transform 0.2s;
@@ -54,9 +67,79 @@
   color: white;
 }
 
-.main-title{
+.main-title {
   background-color: #333;
   width: 100%;
   text-align: center;
   color: #fff;
+}
+
+/* Responsive design */
+@media (max-width: 1024px) {
+  .productos {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1rem;
+  }
+
+  .producto {
+    padding: 0.5rem;
+  }
+
+  .producto h4 {
+    font-size: 0.9rem;
+  }
+
+  .producto p {
+    font-size: 0.8rem;
+  }
+
+  .producto .ver-mas {
+    padding: 0.4rem 0.8rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .productos {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 0.75rem;
+  }
+
+  .producto {
+    padding: 0.5rem;
+  }
+
+  .producto h4 {
+    font-size: 0.85rem;
+  }
+
+  .producto p {
+    font-size: 0.75rem;
+  }
+
+  .producto .ver-mas {
+    padding: 0.3rem 0.7rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .productos {
+    grid-template-columns: 1fr;
+    gap: 0.5rem;
+  }
+
+  .producto {
+    padding: 0.5rem;
+  }
+
+  .producto h4 {
+    font-size: 0.8rem;
+  }
+
+  .producto p {
+    font-size: 0.7rem;
+  }
+
+  .producto .ver-mas {
+    padding: 0.25rem 0.6rem;
+  }
 }

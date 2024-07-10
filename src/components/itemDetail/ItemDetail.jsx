@@ -119,11 +119,11 @@ const ItemDetail = ({ item }) => {
             <p className="product-availability">Availability: In Stock</p>
             <div className="details-text">
               <p className="descripcion"><strong>Descripción:</strong></p>
-              <ul>
+              {/* <ul>
                 {formattedDescription.map((item, index) => (
                   <li key={index}>{item}</li>
                 ))}
-              </ul>
+              </ul> */}
               <p className="categoria">Categoria: {nombreCat}</p>
             </div>
             <div className="product-quantity-container">
