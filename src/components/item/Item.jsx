@@ -34,7 +34,7 @@ const Item = ({ producto, idCategoria }) => {
         <h4 className="producto-name">{producto.productname}</h4>
         <p className="producto-price">Precio: ${producto.productprice}</p>
         {/* <p className="producto-category">Categoria: {nombreCategoria}</p> */}
-        {/* <p className="producto-price">Stock:{producto.stock}</p> */}
+        <p className="producto-price">Stock:{producto.stock}</p>
           {/* ver más */}
         </div>
         </div>
