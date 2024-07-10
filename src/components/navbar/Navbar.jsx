@@ -1,7 +1,7 @@
 // import React, { useState, useEffect } from 'react';
 import './navbar.css';
 import { Link } from 'react-router-dom';
-import CartWitdge from './cartwidtge/CartWitdge';
+import CartWitdge from '../cartwidtge/CartWitdge';
 
 function Navbar() {
 

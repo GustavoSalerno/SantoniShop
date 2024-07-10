@@ -5,19 +5,19 @@ import "./App.css";
 // import Tet  from './components/Te44xt';
 // import ContactoIntermedio from "./components/navbar/ContactoIntermedio";
 import Navbar from "./components/navbar/Navbar";
-import ItemListContainer from "./components/navbar/itemList/ItemListContainer";
-import ItemDetailContainer from "./components/navbar/itemDetail/ItemDetailContainer"
+import ItemListContainer from "./components/itemList/ItemListContainer";
+import ItemDetailContainer from "./components/itemDetail/ItemDetailContainer"
 // import Myp  from './components/Myp';
 import { BrowserRouter, Route, Routes } from "react-router-dom";
-import Nosotros from "./components/navbar/Nosotros";
-import ContactoAvanzado from "./components/navbar/ContactoAvanzado";
+import Nosotros from "./components/Nosotros";
+import ContactoAvanzado from "./components/ContactoAvanzado";
 
 import {  CartProvider } from "./components/context/CartContext";
-import Carrito from "./components/navbar/Carrito";
-import Checkout from "./components/navbar/Checkout";
-import Aside from "./components/navbar/aside/Aside";
+import Carrito from "./components/Carrito";
+import Checkout from "./components/Checkout";
+// import Aside from "./components/aside/Aside";
 import './App.css'
-import { ImageCarousel } from "./components/navbar/carousel/ImageCarousel";
+import { ImageCarousel } from "./components/carousel/ImageCarousel";
 
 // import { Contacto } from "./components/navbar/ContactoSimple";
 function App() {

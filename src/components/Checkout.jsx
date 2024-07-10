@@ -1,8 +1,8 @@
 import React, { useContext, useState } from 'react'
-import { CartContext } from '../context/CartContext';
+import { CartContext } from './context/CartContext';
 import { useForm } from 'react-hook-form';
 import { collection, addDoc } from 'firebase/firestore';
-import { db } from '../others/firebase/Config';
+import { db } from './others/firebase/Config';
 import Item from './item/Item';
 const Checkout = () => {
     const { carrito, precioTotal,vaciarCarrito } = useContext(CartContext);

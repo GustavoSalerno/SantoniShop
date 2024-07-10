@@ -1,9 +1,9 @@
 import { useContext, useEffect, useState } from "react";
 import ItemCount from "../itemCount/ItemCount";
-import { CartContext } from "../../context/CartContext";
+import { CartContext } from "../context/CartContext";
 import ItemListContainer from "../itemList/ItemListContainer";
 import './itemdetail.css';
-import { fetchProductById } from "../../utils/endpoints";
+import { fetchProductById } from "../utils/endpoints";
 import {ImageCarousel}  from "../carousel/ImageCarousel";
 import ProductCarousel from "../carouselProd/ProductCarousel";
 

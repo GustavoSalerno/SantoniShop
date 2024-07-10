@@ -3,7 +3,7 @@ import './ImageCarousel.css';
 
 const importAll = (requireContext) => requireContext.keys().map(requireContext);
 
-const images = importAll(require.context('../../../../public/assets/propaganda', false, /\.(png|jpe?g|svg)$/)).map(image => image.replace('../../../../public', ''));
+const images = importAll(require.context('../../../public/assets/propaganda', false, /\.(png|jpe?g|svg)$/)).map(image => image.replace('../../../public', ''));
 
 export const ImageCarousel = () => {
   const [currentIndex, setCurrentIndex] = useState(0);

@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import { fetchProductById } from '../../utils/endpoints'
+import { fetchProductById } from '../utils/endpoints'
 import './item.css'
 const Item = ({ producto, idCategoria }) => {
   // //console.log(producto); // Para verificar que producto es un objeto correcto
@@ -12,7 +12,7 @@ const Item = ({ producto, idCategoria }) => {
       try {
         const data = await fetchProductById(idCategoria);
         //console.log()
-        setNombreCategoria(data[0].categoryname);
+        setNombreCategoria(data.categoryname);
         // setSelectedImage(data.images[0]);
       } catch (error) {
         console.error('Error loading product:', error);
