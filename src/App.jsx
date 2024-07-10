@@ -16,7 +16,7 @@ import {  CartProvider } from "./components/context/CartContext";
 import Carrito from "./components/navbar/Carrito";
 import Checkout from "./components/navbar/Checkout";
 import Aside from "./components/navbar/aside/Aside";
-
+import './App.css'
 
 // import { Contacto } from "./components/navbar/ContactoSimple";
 function App() {
@@ -28,6 +28,9 @@ function App() {
       <BrowserRouter>
 
         <Navbar />
+        <div className="main-layout">
+      <Aside />
+      <div className="main-content">
       <Routes>
         <Route path='/' element={<ItemListContainer />} />
         <Route path='/item/:id' element={<ItemDetailContainer itemId={6} />}/>
@@ -41,7 +44,8 @@ function App() {
         <Route path='/carrito'element={<Carrito />} />
         <Route path='/checkout'element={<Checkout />} />
         </Routes>  
-      <Aside />
+        </div>
+        </div>
       </BrowserRouter>
       </CartProvider>
     </div>

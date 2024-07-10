@@ -5,6 +5,7 @@ import { faShoppingCart } from '@fortawesome/free-solid-svg-icons';
 import { CartContext } from '../../context/CartContext';
 import React, { useContext } from 'react'
 import { Link } from 'react-router-dom'
+import './CartWitdge.css'
 const CartWidget = () => {
   const {  cantidadEnCarrito } = useContext(CartContext);
   return (

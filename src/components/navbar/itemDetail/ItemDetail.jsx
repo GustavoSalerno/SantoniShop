@@ -83,7 +83,7 @@ console.log(`/${item.id}/${item.productimage1}`)
             <h2 className="product-name">{item.productname}</h2>
             <p className="product-price">
               <span className="product-price-original">{item.originalPrice}</span>
-              <span className="product-price-discounted">{item.productprice}</span>
+              <span className="product-price-discounted">${item.productprice}</span>
             </p>
             <p className="product-availability">Availability: In Stock</p>
             <div className="details-text">
