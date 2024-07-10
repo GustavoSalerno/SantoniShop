@@ -19,6 +19,7 @@ import Checkout from "./components/Checkout";
 import './App.css'
 import { ImageCarousel } from "./components/carousel/ImageCarousel";
 import SearchResultsPage from "./components/seach/SearchResultsPage";
+import Footer from "./components/footer/Footer";
 
 // import { Contacto } from "./components/navbar/ContactoSimple";
 function App() {
@@ -52,6 +53,7 @@ function App() {
         </Routes>  
         </div>
         </div>
+      <Footer />
       </BrowserRouter>
       </CartProvider>
     </div>
