@@ -2,9 +2,12 @@
   display: flex;
   flex-direction: column;
   align-items: center;
+  background-color: #16ddc6;
+  width: 100%;
 }
 
 .product-quantity-container {
+  margin-top: 3px;
   display: flex;
   align-items: center;
   margin-bottom: 20px;
@@ -15,15 +18,16 @@
 }
 
 .quantity-button {
-  background-color: #00796b;
+  background-color: #ff957a;
   color: white;
   border: none;
   padding: 10px;
-  font-size: 18px;
+  font-size: 28px;
   cursor: pointer;
   transition: background-color 0.3s ease;
   margin: 0 10px;
   border-radius: 5px;
+  
 }
 
 .quantity-button:hover {
@@ -45,7 +49,8 @@
   transition: background-color 0.3s ease;
   font-size: 16px;
   border-radius: 5px;
-  margin-top: 10px;
+  margin-top: 1px;
+  margin-bottom: 2px;
 }
 
 .add-to-cart:hover {

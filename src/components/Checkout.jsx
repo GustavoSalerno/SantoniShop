@@ -3,7 +3,7 @@ import { CartContext } from './context/CartContext';
 import { useForm } from 'react-hook-form';
 import { collection, addDoc } from 'firebase/firestore';
 import { db } from './others/firebase/Config';
-import Item from './item/Item';
+
 const Checkout = () => {
     const { carrito, precioTotal,vaciarCarrito } = useContext(CartContext);
     const {register, handleSubmit} = useForm();
@@ -16,7 +16,6 @@ const Checkout = () => {
         }
         //console.log(pedido)
 
-        
         const pedidosRef = collection(db, "pedidos");
         addDoc(pedidosRef,pedido)
         .then((doc) => {
@@ -33,6 +32,7 @@ const Checkout = () => {
             </div>
         )
       }
+      console.log(carrito,"carrrito")
       
       return (
         <div className="container">
@@ -47,6 +47,7 @@ const Checkout = () => {
               Enviar
             </button>
           </form>
+          
         </div>
       );
     };

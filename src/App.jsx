@@ -18,6 +18,7 @@ import Checkout from "./components/Checkout";
 // import Aside from "./components/aside/Aside";
 import './App.css'
 import { ImageCarousel } from "./components/carousel/ImageCarousel";
+import SearchResultsPage from "./components/seach/SearchResultsPage";
 
 // import { Contacto } from "./components/navbar/ContactoSimple";
 function App() {
@@ -28,8 +29,8 @@ function App() {
      <CartProvider>
       <BrowserRouter>
 
-        <Navbar />
         <ImageCarousel />
+        <Navbar />
         <div className="main-layout">
       
       {/* <Aside /> */}
@@ -42,6 +43,8 @@ function App() {
         <Route path='/productos/:idcategoria?:subcategorias'element={<ItemListContainer />} />
         <Route path='/productos/:idcategoria?:subcategorias?:producto'element={<ItemListContainer />} />
         <Route path='/nosotros'element={<Nosotros />} />
+        <Route path="/search/:query" element={<SearchResultsPage />} /> {/* Add the search results page route */}
+
         {/* <Route path='/contacto'element={<ContactoIntermedio />} /> */}
         <Route path='/contacto'element={<ContactoAvanzado />} />
         <Route path='/carrito'element={<Carrito />} />

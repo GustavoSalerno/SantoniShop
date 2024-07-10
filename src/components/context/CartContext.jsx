@@ -30,14 +30,17 @@ export const CartProvider = ({ children }) => {
   };
   const precioTotal = () => {
     return carrito.reduce(
-      (acumulador, prod) => acumulador + prod.precio * prod.cantidad,
+      (acumulador, prod) => acumulador + prod.productprice * prod.cantidad,
       0
     );
   };
   const vaciarCarrito = () => {
     setCarrito([]);
   };
-
+  const eliminarDelCarrito = (id) => {
+    const nuevoCarrito = carrito.filter((producto) => producto.id !== id);
+    setCarrito(nuevoCarrito);
+  };
   return (
     <CartContext.Provider
       value={{
@@ -46,6 +49,7 @@ export const CartProvider = ({ children }) => {
         cantidadEnCarrito,
         precioTotal,
         vaciarCarrito,
+        eliminarDelCarrito,
       }}
     >
       {children}

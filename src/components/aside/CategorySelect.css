@@ -1,0 +1,38 @@
+/* CategorySelect.css */
+.category-select {
+    position: relative;
+    display: inline-block;
+  }
+  
+  .category-button {
+    background-color: #444;
+    color: white;
+    padding: 10px 20px;
+    cursor: pointer;
+    border-radius: 5px;
+  }
+  
+  .category-select:hover .category-dropdown {
+    display: block;
+  }
+  
+  .category-dropdown {
+    display: none;
+    position: absolute;
+    background-color: #333;
+    min-width: 200px;
+    z-index: 1;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    border-radius: 5px;
+  }
+  
+  .category-option {
+    color: white;
+    padding: 10px 20px;
+    cursor: pointer;
+  }
+  
+  .category-option:hover {
+    background-color: #555;
+  }
+  
