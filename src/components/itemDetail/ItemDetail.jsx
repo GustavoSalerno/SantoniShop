@@ -64,13 +64,14 @@ const ItemDetail = ({ item }) => {
     item.productimage3
   ].filter(image => image);
 
-  const imagePath = (image) => `../../assets/productimages/${item.id}/${image}`;
+  const imagePath = (image) => `../../../../assets/productimages/${item.id}/${image}`;
 
   const idCategoria = item.subcategory;
   useEffect(() => {
     const loadProduct = async () => {
       try {
         const data = await fetchProductById(idCategoria);
+        console.log(data)
         setNombreCategoria(data[0].categoryname);
       } catch (error) {
         console.error('Error loading product:', error);
@@ -79,16 +80,16 @@ const ItemDetail = ({ item }) => {
     loadProduct();
   }, [idCategoria]);
 
-  const formatDescription = (description) => {
-    const regex = /<li.*?>(.*?)<\/li>/g;
-    const matches = description.matchAll(regex);
-    const formattedDescription = Array.from(matches).map(
-      (match) => match[1]
-    );
-    return formattedDescription;
-  };
+  // const formatDescription = (description) => {
+  //   const regex = /<li.*?>(.*?)<\/li>/g;
+  //   const matches = description.matchAll(regex);
+  //   const formattedDescription = Array.from(matches).map(
+  //     (match) => match[1]
+  //   );
+  //   return formattedDescription;
+  // };
 
-  const formattedDescription = formatDescription(item.productdescription);
+  // const formattedDescription = formatDescription(item.productdescription);
 
   return (
     <div>
