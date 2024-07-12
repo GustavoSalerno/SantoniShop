@@ -1,0 +1,76 @@
+.container-pro {
+    margin: 20px;
+    padding: 20px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    background-color: #f9f9f9;
+  }
+  
+  .h2 {
+    margin-bottom: 20px;
+  }
+  
+  .form {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .form-group {
+    margin-bottom: 15px;
+  }
+  
+  .form-label {
+    margin-bottom: 5px;
+    font-weight: bold;
+  }
+  
+  .form-input {
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 3px;
+  }
+  
+  .form-button {
+    padding: 10px;
+    border: none;
+    border-radius: 3px;
+    background-color: #5cb85c;
+    color: white;
+    cursor: pointer;
+  }
+  
+  .alert {
+    padding: 10px;
+    margin-bottom: 10px;
+    border-radius: 3px;
+  }
+  
+  .alert-success {
+    background-color: #dff0d8;
+    color: #3c763d;
+  }
+  
+  .alert-danger {
+    background-color: #f2dede;
+    color: #a94442;
+  }
+  
+  .product-list {
+    margin: 20px;
+  }
+  
+  .table {
+    width: 100%;
+    border-collapse: collapse;
+  }
+  
+  .table th,
+  .table td {
+    padding: 10px;
+    border: 1px solid #ddd;
+  }
+  
+  .table th {
+    background-color: #f2f2f2;
+  }
+  
