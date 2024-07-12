@@ -2,6 +2,8 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import './products.css';
 import ProductList from './ProductsList';
+import 'bootstrap/dist/css/bootstrap.min.css';
+import Swal from 'sweetalert2';
 
 const CreateProduct = () => {
   const [categories, setCategories] = useState([]);
@@ -14,15 +16,13 @@ const CreateProduct = () => {
   const [productPriceBeforeDiscount, setProductPriceBeforeDiscount] = useState('');
   const [productDescription, setProductDescription] = useState('');
   const [productImages, setProductImages] = useState([null, null, null]);
-  const [shippingCharge, setShippingCharge] = useState('');
+  const [shippingCharge, setShippingCharge] = useState(0);
   const [productAvailability, setProductAvailability] = useState('In Stock');
-  const [stock, setStock] = useState('');
+  const [stock, setStock] = useState(10);
   const [errorMessage, setErrorMessage] = useState('');
   const [successMessage, setSuccessMessage] = useState('');
   const [editingProduct, setEditingProduct] = useState(null);
-const [productimage1, setProductImage1] = useState('');
-const [productimage2, setProductImage2] = useState('');
-const [productimage3, setProductImage3] = useState('');
+
   useEffect(() => {
     fetchCategories();
   }, []);
@@ -35,6 +35,24 @@ const [productimage3, setProductImage3] = useState('');
       console.error('Error fetching categories:', error);
       setErrorMessage('Error fetching categories');
     }
+  };
+
+  const confirmCreateProduct = () => {
+    Swal.fire({
+      title: 'Producto Creado con exito',
+      text: 'Seguro que quieres crear el producto?',
+      icon: 'success',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Crear',
+      cancelButtonText: 'Cancelar'
+    }).then((result) => {
+      if (result.isConfirmed) {
+        handleAddProduct();
+        Swal.fire('Muy Bien', 'El producto ha sido Creado.', 'success');
+      }
+    });
   };
 
   const fetchSubCategories = async (categoryId) => {
@@ -65,9 +83,7 @@ const [productimage3, setProductImage3] = useState('');
     });
   };
 
-  const handleAddProduct = async (e) => {
-    e.preventDefault();
-
+  const handleAddProduct = async () => {
     const formData = new FormData();
     formData.append('category', selectedCategory);
     formData.append('subcategory', selectedSubCategory);
@@ -91,8 +107,7 @@ const [productimage3, setProductImage3] = useState('');
           'Content-Type': 'multipart/form-data',
         },
       });
-      console.log(response.data);
-      if (response.data) {
+      if (response.data.success) {
         setSelectedCategory('');
         setSelectedSubCategory('');
         setProductName('');
@@ -146,14 +161,22 @@ const [productimage3, setProductImage3] = useState('');
     formData.append('shippingcharge', shippingCharge);
     formData.append('productavailability', productAvailability);
     formData.append('stock', stock);
+    
+    let imagesChanged = false;
     productImages.forEach((image, index) => {
       if (image) {
         formData.append(`productimage${index + 1}`, image);
+        imagesChanged = true;
       }
     });
 
+    // Add a flag to indicate that images are not being updated
+    if (!imagesChanged) {
+      formData.append('images_not_updated', 'true');
+    }
+
     try {
-      const response = await axios.put('https://pro.dna.netlatin.net.ar/endpoints/E-Commerce/abm/updateProduct.php', formData, {
+      const response = await axios.post('https://pro.dna.netlatin.net.ar/endpoints/E-Commerce/abm/updateProduct.php', formData, {
         headers: {
           'Content-Type': 'multipart/form-data',
         },
@@ -184,169 +207,178 @@ const [productimage3, setProductImage3] = useState('');
     }
   };
 
+  const handleCancelar = () => {
+    setEditingProduct(null);
+    setSelectedCategory('');
+    setSelectedSubCategory('');
+    setProductName('');
+    setProductCompany('');
+    setProductPrice('');
+    setProductPriceBeforeDiscount('');
+    setProductDescription('');
+    setProductImages([null, null, null]);
+    setShippingCharge(0);
+    setProductAvailability('In Stock');
+    setStock(5);
+  };
+
   return (
     <div>
       <div className='container-pro'>
-        <h1 className="h2">{editingProduct ? 'Editar Producto' : 'Crear Producto'}</h1>
+        <h1 className="h2">{editingProduct ? 'Editar Producto id: ' + editingProduct.id : 'Crear Producto'}</h1>
         {successMessage && <div className="alert alert-success">{successMessage}</div>}
         {errorMessage && <div className="alert alert-danger">{errorMessage}</div>}
         <form className="form" onSubmit={editingProduct ? handleUpdateProduct : handleAddProduct}>
-          <div className="form-group">
-            <label className="form-label">Categoría</label>
-            <select
-              className="form-input"
-              value={selectedCategory}
-              onChange={handleCategoryChange}
-              required
-            >
-              <option value="">Selecciona una categoría</option>
-              {categories.map((category) => (
-                <option key={category.id} value={category.id}>
-                  {category.categoryname}
-                </option>
-              ))}
-            </select>
-          </div>
+          <div className="form-row">
+            <div className="form-group">
+              <label className="form-label">Categoría</label>
+              <select
+                className="form-input"
+                value={selectedCategory}
+                onChange={handleCategoryChange}
+                
+              >
+                <option value="">Selecciona una categoría</option>
+                {categories.map((category) => (
+                  <option key={category.id} value={category.id}>
+                    {category.categoryname}
+                  </option>
+                ))}
+              </select>
+            </div>
 
-          <div className="form-group">
-            <label className="form-label">Subcategoría</label>
-            <select
-              className="form-input"
-              value={selectedSubCategory}
-              onChange={(e) => handleInputChange(e, setSelectedSubCategory)}
-              required
-            >
-              <option value="">Selecciona una subcategoría</option>
-              {subcategories.map((subcategory) => (
-                <option key={subcategory.id} value={subcategory.id}>
-                  {subcategory.subcategory}
-                </option>
-              ))}
-            </select>
-          </div>
+            <div className="form-group">
+              <label className="form-label">Subcategoría</label>
+              <select
+                className="form-input"
+                value={selectedSubCategory}
+                onChange={(e) => setSelectedSubCategory(e.target.value)}
+                
+              >
+                <option value="">Selecciona una subcategoría</option>
+                {subcategories.map((subcategory) => (
+                  <option key={subcategory.id} value={subcategory.id}>
+                    {subcategory.subcategory}
+                  </option>
+                ))}
+              </select>
+            </div>
 
-          <div className="form-group">
-            <label className="form-label">Nombre del Producto</label>
-            <input
-              className="form-input"
-              type="text"
-              value={productName}
-              onChange={(e) => handleInputChange(e, setProductName)}
-              required
-            />
-          </div>
+            <div className="form-group">
+              <label className="form-label">Nombre del Producto</label>
+              <input
+                className="form-input"
+                type="text"
+                value={productName}
+                onChange={(e) => handleInputChange(e, setProductName)}
+                
+              />
+            </div>
 
-          <div className="form-group">
-            <label className="form-label">Compañía del Producto</label>
-            <input
-              className="form-input"
-              type="text"
-              value={productCompany}
-              onChange={(e) => handleInputChange(e, setProductCompany)}
-              required
-            />
-          </div>
+            <div className="form-group">
+              <label className="form-label">Compañía del Producto</label>
+              <input
+                className="form-input"
+                type="text"
+                value={productCompany}
+                onChange={(e) => handleInputChange(e, setProductCompany)}
+                
+              />
+            </div>
 
-          <div className="form-group">
-            <label className="form-label">Precio del Producto</label>
-            <input
-              className="form-input"
-              type="number"
-              value={productPrice}
-              onChange={(e) => handleInputChange(e, setProductPrice)}
-              required
-            />
-          </div>
+            <div className="form-group">
+              <label className="form-label">Precio del Producto</label>
+              <input
+                className="form-input"
+                type="number"
+                value={productPrice}
+                onChange={(e) => handleInputChange(e, setProductPrice)}
+                
+              />
+            </div>
 
-          <div className="form-group">
-            <label className="form-label">Precio Antes de Descuento</label>
-            <input
-              className="form-input"
-              type="number"
-              value={productPriceBeforeDiscount}
-              onChange={(e) => handleInputChange(e, setProductPriceBeforeDiscount)}
-              required
-            />
-          </div>
+            <div className="form-group">
+              <label className="form-label">Precio antes de Descuento</label>
+              <input
+                className="form-input"
+                type="number"
+                value={productPriceBeforeDiscount}
+                onChange={(e) => handleInputChange(e, setProductPriceBeforeDiscount)}
+              />
+            </div>
 
-          <div className="form-group">
-            <label className="form-label">Descripción del Producto</label>
-            <textarea
-              className="form-input"
-              value={productDescription}
-              onChange={(e) => handleInputChange(e, setProductDescription)}
-              required
-            ></textarea>
-          </div>
+            <div className="form-group">
+              <label className="form-label">Descripción del Producto</label>
+              <textarea
+                className="form-input"
+                value={productDescription}
+                onChange={(e) => handleInputChange(e, setProductDescription)}
+                
+              ></textarea>
+            </div>
 
-          <div className="form-group">
-            <label className="form-label">Imagen 1 del Producto</label>
-            <input
-              className="form-input"
-              type="file"
-              value={productimage1}
-              onChange={(e) => handleImageChange(0, e.target.files[0])}
-              required
-            />
-          </div>
+            <div className="form-group">
+              <label className="form-label">Cargos de Envío</label>
+              <input
+                className="form-input"
+                type="number"
+                value={shippingCharge}
+                onChange={(e) => handleInputChange(e, setShippingCharge)}
+                
+              />
+            </div>
 
-          <div className="form-group">
-            <label className="form-label">Imagen 2 del Producto</label>
-            <input
-              className="form-input"
-              type="file"
-              value={productimage2}
-              onChange={(e) => handleImageChange(1, e.target.files[0])}
-            />
-          </div>
+            <div className="form-group">
+              <label className="form-label">Disponibilidad del Producto</label>
+              <select
+                className="form-input"
+                value={productAvailability}
+                onChange={(e) => handleInputChange(e, setProductAvailability)}
+                
+              >
+                <option value="In Stock">En Stock</option>
+                <option value="Out of Stock">Fuera de Stock</option>
+              </select>
+            </div>
 
-          <div className="form-group">
-            <label className="form-label">Imagen 3 del Producto</label>
-            <input
-              className="form-input"
-              type="file"
-              value={productimage3}
-              onChange={(e) => handleImageChange(2, e.target.files[0])}
-            />
-          </div>
+            <div className="form-group">
+              <label className="form-label">Stock</label>
+              <input
+                className="form-input"
+                type="number"
+                value={stock}
+                onChange={(e) => handleInputChange(e, setStock)}
+                
+              />
+            </div>
 
-          <div className="form-group">
-            <label className="form-label">Costo de Envío</label>
-            <input
-              className="form-input"
-              type="number"
-              value={shippingCharge}
-              onChange={(e) => handleInputChange(e, setShippingCharge)}
-              required
-            />
-          </div>
+            <div className="form-group">
+              <label className="form-label">Imágenes del Producto</label>
+              <div className="product-images">
+                {[0, 1, 2].map((index) => (
+                  <input
+                    key={index}
+                    type="file"
+                    accept="image/*"
+                    onChange={(e) => handleImageChange(index, e.target.files[0])}
+                  />
+                ))}
+              </div>
+            </div>
 
-          <div className="form-group">
-            <label className="form-label">Disponibilidad del Producto</label>
-            <input
-              className="form-input"
-              type="text"
-              value={productAvailability}
-              onChange={(e) => handleInputChange(e, setProductAvailability)}
-              required
-            />
+            <div className="form-group">
+              <button type="submit" className="btn btn-primary">
+                {editingProduct ? 'Actualizar Producto' : 'Agregar Producto'}
+              </button>
+              {editingProduct && (
+                <button type="button" className="btn btn-secondary mt-3" onClick={handleCancelar}>
+                  Cancelar
+                </button>
+              )}
+            </div>
           </div>
-
-          <div className="form-group">
-            <label className="form-label">Stock</label>
-            <input
-              className="form-input"
-              type="number"
-              value={stock}
-              onChange={(e) => handleInputChange(e, setStock)}
-              required
-            />
-          </div>
-
-          <button className="form-button" type="submit">{editingProduct ? 'Actualizar Producto' : 'Agregar Producto'}</button>
         </form>
       </div>
-      <br />
       <ProductList onEditProduct={handleEditProduct} />
     </div>
   );

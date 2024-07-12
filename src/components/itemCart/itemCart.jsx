@@ -14,7 +14,7 @@ const ItemCart = ({ carrito }) => {
       carrito.map((producto, index) => (
           <div key={index} className="producto">
             <div className="producto-image-container">
-              <img src={`../../assets/productimages/${producto.id}/${producto.productimage1}`} alt={producto.productname} />
+              <img src={`../../../public/assets/productimages/${producto.id}/${producto.productimage1}`} alt={producto.productname} />
             </div>
             <div className="producto-info">
               <Link className="" to={`/item/${producto.id}`}>

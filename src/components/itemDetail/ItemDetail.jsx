@@ -6,7 +6,7 @@ import './itemdetail.css';
 import { fetchProductById } from "../utils/endpoints";
 import {ImageCarousel}  from "../carousel/ImageCarousel";
 import ProductCarousel from "../carouselProd/ProductCarousel";
-
+import ProductImage from '../assets/imagenComponent/ProductImage'
 const ItemDetail = ({ item }) => {
   const [cantidad, setCantidad] = useState(1);
   const { agregarAlCarrito } = useContext(CartContext);
@@ -64,15 +64,14 @@ const ItemDetail = ({ item }) => {
     item.productimage3
   ].filter(image => image);
 
-  const imagePath = (image) => `../../../../assets/productimages/${item.id}/${image}`;
-
+  const imagePath = (image) => `../../../assets/productimages/${item.id}/${image}`;
   const idCategoria = item.subcategory;
   useEffect(() => {
     const loadProduct = async () => {
       try {
         const data = await fetchProductById(idCategoria);
-        console.log(data)
-        setNombreCategoria(data[0].categoryname);
+        
+        setNombreCategoria(data.categoryname);
       } catch (error) {
         console.error('Error loading product:', error);
       }
@@ -119,12 +118,7 @@ const ItemDetail = ({ item }) => {
             </p>
             <p className="product-availability">Availability: In Stock</p>
             <div className="details-text">
-              <p className="descripcion"><strong>Descripción:</strong></p>
-              {/* <ul>
-                {formattedDescription.map((item, index) => (
-                  <li key={index}>{item}</li>
-                ))}
-              </ul> */}
+              <p className="descripcion"><strong>Descripción:</strong> {item.description}</p>
               <p className="categoria">Categoria: {nombreCat}</p>
             </div>
             <div className="product-quantity-container">

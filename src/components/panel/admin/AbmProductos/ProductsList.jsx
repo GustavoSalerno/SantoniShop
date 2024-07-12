@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import './productsList.css';
+import Swal from 'sweetalert2';
+import ProductoImagen from '../../../assets/imagenComponent/ProductImage';
 
 const ProductList = ({ onEditProduct }) => {
   const [products, setProducts] = useState([]);
@@ -10,6 +12,24 @@ const ProductList = ({ onEditProduct }) => {
   useEffect(() => {
     fetchProducts();
   }, []);
+
+  const confirmDeleteProduct = (id) => {
+    Swal.fire({
+      title: '¿Estás seguro?',
+      text: 'No podrás revertir esto',
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Sí, eliminar',
+      cancelButtonText: 'Cancelar'
+    }).then((result) => {
+      if (result.isConfirmed) {
+        handleDeleteProduct(id);
+        Swal.fire('Eliminado', 'El producto ha sido eliminado.', 'success');
+      }
+    });
+  };
 
   const fetchProducts = async () => {
     try {
@@ -22,6 +42,7 @@ const ProductList = ({ onEditProduct }) => {
   };
 
   const handleDeleteProduct = async (productId) => {
+    
     try {
       const response = await axios.delete(`https://pro.dna.netlatin.net.ar/endpoints/E-Commerce/abm/deleteProduct.php?id=${productId}`);
       if (response.data.success) {
@@ -39,10 +60,7 @@ const ProductList = ({ onEditProduct }) => {
     }
   };
 
-  const handleSeguro = (id) => {
-    alert('estas seguro de eliminar el producto con id: ' + id)
-    handleDeleteProduct(id)
-  }
+
   return (
     <div className="product-list">
       <h2>Lista de Productos</h2>
@@ -64,16 +82,19 @@ const ProductList = ({ onEditProduct }) => {
           {products.map((product) => (
             <tr key={product.id}>
               <td>{product.id}</td>
-              <td>
-                <img src={`../../../../../public/assets/productimages/${product.id}/${product.productimage1}`} alt={`../../../../../public/assets/productimages/${product.id}/${product.productimage1}`} />
+              <td className='image-container-list'>
+               <ProductoImagen producto={product} clas={2} />
               </td>
               <td>{product.productname}</td>
               <td>{product.productcompany}</td>
               <td>{product.productprice}</td>
               <td>{product.productavailability}</td>
               <td className='actions'>
+                <div className='bt'>
                 <button className='button' onClick={() => onEditProduct(product)}>Editar</button>
-                <button className='button-delete' onClick={handleSeguro}>Eliminar</button>
+                <button className='button-delete' onClick={() => confirmDeleteProduct(product.id)}>Eliminar</button>
+                </div>
+                    
               </td>
             </tr>
           ))}

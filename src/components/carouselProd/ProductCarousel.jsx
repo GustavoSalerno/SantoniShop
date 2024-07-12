@@ -4,7 +4,7 @@ import "./ProductCarousel.css";
 import Item from "../item/Item";
 
 const ProductCarousel = ({ productos, titulo = null }) => {
-  console.log(productos);
+  
 
   return (
     <div className="product-carousel">

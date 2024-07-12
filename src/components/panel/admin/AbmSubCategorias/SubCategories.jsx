@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import "./subcategorias.css";
+import Swal from 'sweetalert2';
 
 const Categories = () => {
   const [subcategories, setSubCategories] = useState([]);
@@ -12,6 +13,42 @@ const Categories = () => {
   useEffect(() => {
     fetchCategoriesAndSubCategories();
   }, []);
+
+  const confirmDeleteProduct = (id) => {
+    Swal.fire({
+      title: '¿Estás seguro?',
+      text: 'No podrás revertir esto',
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Sí, eliminar',
+      cancelButtonText: 'Cancelar'
+    }).then((result) => {
+      if (result.isConfirmed) {
+        handleDeleteSubCategory(id);
+        Swal.fire('Eliminado', 'La Subcategoría ha sido eliminada.', 'success');
+      }
+    });
+  };
+
+  const confirmEditSubCategoria = (id) => {
+    Swal.fire({
+      title: '¿Estás seguro?',
+      text: 'Estás por actualizar la Subcategoría',
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Sí, actualizar',
+      cancelButtonText: 'Cancelar'
+    }).then((result) => {
+      if (result.isConfirmed) {
+        handleEditSubCategory(id);
+        Swal.fire('Editado', 'La Subcategoría ha sido editada.', 'success');
+      }
+    });
+  };
 
   const fetchCategoriesAndSubCategories = async () => {
     try {
@@ -39,7 +76,7 @@ const Categories = () => {
           categoryid: categoryId,
         }
       );
-      if (response.data) {
+      if (response.data.success) {
         fetchCategoriesAndSubCategories();
         setSubcategoryName("");
         setCategoryId("");
@@ -49,12 +86,12 @@ const Categories = () => {
     }
   };
 
-  const handleEditSubCategory = async () => {
+  const handleEditSubCategory = async (id) => {
     try {
       const response = await axios.put(
-        "https://pro.dna.netlatin.net.ar/endpoints/E-Commerce/abm/updateSubCategory.php",
+        'https://pro.dna.netlatin.net.ar/endpoints/E-Commerce/abm/updateSubCategory.php',
         {
-          id: editingSubCategory.id,
+          id: id,
           subcategory: subcategoryName,
           categoryid: categoryId,
         }
@@ -73,7 +110,7 @@ const Categories = () => {
   const handleDeleteSubCategory = async (id) => {
     try {
       const response = await axios.delete(`https://pro.dna.netlatin.net.ar/endpoints/E-Commerce/abm/deleteSubCategory.php?id=${id}`);
-      if (response.data) {
+      if (response.data.success) {
         fetchCategoriesAndSubCategories();
       }
     } catch (error) {
@@ -84,7 +121,7 @@ const Categories = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     if (editingSubCategory) {
-      handleEditSubCategory();
+      confirmEditSubCategoria(editingSubCategory.id);
     } else {
       handleAddSubCategory();
     }
@@ -142,14 +179,14 @@ const Categories = () => {
         {subcategories.map((subcategory) => (
           <li className="li" key={subcategory.id}>
             <div className="category-info">
-            <strong>{subcategory.subcategory}</strong>
+              <strong>{subcategory.subcategory}</strong>
               <strong>{subcategory.subcategoryname}</strong>  {getCategoryNameById(subcategory.categoryid)}
             </div>
             <div>
               <button className="button" onClick={() => startEditing(subcategory)}>
                 Editar
               </button>
-              <button className="button-delete" onClick={() => handleDeleteSubCategory(subcategory.id)}>
+              <button className="button-delete" onClick={() => confirmDeleteProduct(subcategory.id)}>
                 Eliminar
               </button>
             </div>

@@ -1,0 +1,51 @@
+.admin-panel{
+    border: 1px solid black;
+    padding: 10px;
+}
+.admin-nav{
+    border: 1px solid rgb(73, 226, 12);
+   margin-bottom: 20px;
+}
+
+.admin-content{
+padding: 20px;    
+    border: 1px solid red;
+}
+
+.admin-nav ul {
+    display: flex;
+    justify-content: space-around; /* Espacio entre los ítems */
+    padding: 0;
+    margin: 0;
+    list-style: none;
+    background-color: #18c482; /* Color de fondo */
+  }
+  
+  .admin-nav li {
+    margin: 0;
+  }
+  
+  .admin-nav a {
+    display: block;
+    padding: 15px 20px;
+    text-decoration: none;
+    color: #343a40; /* Color del texto */
+    transition: background-color 0.3s, color 0.3s; /* Transición para efectos */
+  }
+  
+  .admin-nav a:hover {
+    background-color: #007bff; /* Color de fondo al pasar el cursor */
+    color: #ffffff; /* Color del texto al pasar el cursor */
+  }
+  
+  @media (max-width: 768px) {
+    .admin-nav ul {
+      flex-direction: column; /* En dispositivos pequeños, mostrar los ítems en columna */
+      align-items: center;
+    }
+  
+    .admin-nav a {
+      padding: 10px 15px;
+    }
+  }
+  
