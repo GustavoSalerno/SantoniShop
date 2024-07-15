@@ -30,10 +30,9 @@ export const CartProvider = ({ children }) => {
   };
   const precioTotal = () => {
     return carrito.reduce(
-      (acumulador, prod) => acumulador + prod.productprice * prod.cantidad,
-      0
-    );
+      (acumulador, prod) => acumulador + prod.productprice * prod.cantidad,0);
   };
+  
   const vaciarCarrito = () => {
     setCarrito([]);
   };

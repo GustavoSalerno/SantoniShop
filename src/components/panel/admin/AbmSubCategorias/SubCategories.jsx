@@ -28,6 +28,7 @@ const Categories = () => {
       if (result.isConfirmed) {
         handleDeleteSubCategory(id);
         Swal.fire('Eliminado', 'La Subcategoría ha sido eliminada.', 'success');
+        fetchCategoriesAndSubCategories()
       }
     });
   };

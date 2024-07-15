@@ -18,8 +18,8 @@
 
 .producto-image-container {
   flex-shrink: 0;
-  width: 100px;
-  height: 150px;
+  width: 1000px;
+  height: auto;
   overflow: hidden;
 }
 
@@ -42,6 +42,12 @@
 .producto-price {
   font-size: 16px;
   color: #666;
+}
+.producto-price2 {
+  font-size: 16px;
+  text-align: left;
+  color: #666;
+  text-decoration: none;
 }
 
 .producto-actions {

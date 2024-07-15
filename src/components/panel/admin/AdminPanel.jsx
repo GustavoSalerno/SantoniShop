@@ -5,6 +5,8 @@ import Categories from "./AbmCategorias/Categories";
 import SubCategories from "./AbmSubCategorias/SubCategories";
 import Orders from "./Ordenes/Orders";
 import "./AdminPanel.css";
+import Registro from "../../registroUsuarios/Registro";
+import Invoice from "./factura/Invoice";
 
 const AdminPanel = () => {
   return (
@@ -26,6 +28,9 @@ const AdminPanel = () => {
           <li>
             <Link to="/admin/orders">Órdenes</Link>
           </li>
+          <li>
+            <Link to="/admin/usuarios">Usuarios</Link>
+          </li>
         </ul>
       </nav>
       <div className="admin-content">
@@ -34,6 +39,8 @@ const AdminPanel = () => {
           <Route path="/products" element={<Products />} />
           <Route path="/categories" element={<Categories />} />
           <Route path="/subcategories" element={<SubCategories />} />
+          {/* <Route path="/orders" element={<Invoice />} /> */}
+          <Route path="/usuarios" element={<Registro />} />
           <Route path="/orders" element={<Orders />} />
         </Routes>
       </div>

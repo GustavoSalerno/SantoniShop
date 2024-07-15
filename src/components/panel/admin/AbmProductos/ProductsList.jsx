@@ -27,6 +27,7 @@ const ProductList = ({ onEditProduct }) => {
       if (result.isConfirmed) {
         handleDeleteProduct(id);
         Swal.fire('Eliminado', 'El producto ha sido eliminado.', 'success');
+        
       }
     });
   };

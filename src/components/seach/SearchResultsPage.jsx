@@ -40,3 +40,9 @@ console.log(query)
 };
 
 export default SearchResultsPage;
+
+
+
+
+
+// billingaddress=Fortin Olavarrio 673&billingcity=General Rodriguez&billingpincode=1748&billingstate=GENERAL RODRIGUEZ&contactno=1125469707&documento=38839394&email=thegeniussupreme@gmail.com&name=Cristian Salerno&password=lancelot&shippingaddress=Fortin Olavarrio 673&shippingcity=General Rodriguez&shippingpincode=1748

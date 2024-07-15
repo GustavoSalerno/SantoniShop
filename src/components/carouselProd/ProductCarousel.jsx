@@ -5,7 +5,6 @@ import Item from "../item/Item";
 
 const ProductCarousel = ({ productos, titulo = null }) => {
   
-
   return (
     <div className="product-carousel">
       <h2>{titulo !== null ? titulo : "Productos Relacionados"}</h2>

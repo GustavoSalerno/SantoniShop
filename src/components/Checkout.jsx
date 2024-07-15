@@ -40,23 +40,37 @@ const Checkout = () => {
 
             <div className="cart-summary">
                 {carrito.length > 0 ? (
-                    carrito.map((producto) => (
+                   carrito.map((producto) => {
+                    const imageUrl = `/assets/productimages/${producto.id}/${producto.productimage1}`;
+                    console.log(imageUrl); // Verifica la URL en la consola
+                    return (
                         <div key={producto.id} className="product-summary">
-                          {console.log(`../../public/assets/productimages/${producto.id}/${producto.productimage1}`)}
-                            <img src={`../../public/assets/productimages/${producto.id}/${producto.productimage1}`} alt={producto.productname} className="product-image" />
+                            <img src={imageUrl} alt={producto.productname} className="product-image" />
                             <div className="product-details">
                                 <h2>{producto.productname}</h2>
-                                <p>Precio: ${producto.productprice}</p>
+                                <p>Precio: ${producto.productdescription}</p>
                             </div>
                         </div>
-                    ))
+                    );
+                })
                 ) : (
                     <p>No hay productos en el carrito.</p>
                 )}
-                <h3>Total: ${precioTotal()}</h3>
+                <div className='final-compra'>
+                <h3 className='precio2'>"detallws de la compra"</h3>
+                <h3 className='precio'>Total: ${precioTotal()}</h3>
+                </div>
             </div>
 
-           <img src="../lic/assets/productimages/80/logo.jpg" width={'3000px'} alt="" />
+   
+            <form className="formulario" onSubmit={handleSubmit(comprar)}>
+                <input type="text" placeholder="Ingresa tu nombre" {...register("nombre")} required />
+                <input type="email" placeholder="Ingresa tu email" {...register("email")} required />
+                <input type="tel" placeholder="Ingresa tu teléfono" {...register("telefono")} required />
+                <button className="enviar" type="submit">
+                    Enviar
+                </button>
+            </form>
         </div>
     );
 };
