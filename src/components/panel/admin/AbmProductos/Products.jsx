@@ -16,12 +16,14 @@ const CreateProduct = () => {
   const [productPriceBeforeDiscount, setProductPriceBeforeDiscount] = useState('');
   const [productDescription, setProductDescription] = useState('');
   const [productImages, setProductImages] = useState([null, null, null]);
+  const [productImageUrls, setProductImageUrls] = useState(['', '', '']);
   const [shippingCharge, setShippingCharge] = useState(0);
   const [productAvailability, setProductAvailability] = useState('In Stock');
   const [stock, setStock] = useState(10);
   const [errorMessage, setErrorMessage] = useState('');
   const [successMessage, setSuccessMessage] = useState('');
   const [editingProduct, setEditingProduct] = useState(null);
+
 
   useEffect(() => {
     fetchCategories();
@@ -38,6 +40,23 @@ const CreateProduct = () => {
   };
 
   const confirmCreateProduct = () => {
+    Swal.fire({
+      title: 'Producto Creado con exito',
+      text: 'Seguro que quieres crear el producto?',
+      icon: 'success',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Crear',
+      cancelButtonText: 'Cancelar'
+    }).then((result) => {
+      if (result.isConfirmed) {
+        handleAddProduct();
+        Swal.fire('Muy Bien', 'El producto ha sido Creado.', 'success');
+      }
+    });
+  };
+  const confirmEditProduct = () => {
     Swal.fire({
       title: 'Producto Creado con exito',
       text: 'Seguro que quieres crear el producto?',
@@ -144,6 +163,11 @@ const CreateProduct = () => {
     setShippingCharge(product.shippingcharge);
     setProductAvailability(product.productavailability);
     setStock(product.stock);
+    setProductImageUrls([
+      product.image1 ? `../../../assets/img/ProductList/${product.id}/productimage1.jpg` : '',
+      product.image2 ? `../../../assets/img/ProductList/${product.id}/productimage2.jpg` : '',
+      product.image3 ? `../../../assets/img/ProductList/${product.id}/productimage3.jpg` : ''
+    ]);
   };
 
   const handleUpdateProduct = async (e) => {
@@ -194,7 +218,7 @@ const CreateProduct = () => {
         setShippingCharge(0);
         setProductAvailability('In Stock');
         setStock(5);
-        setSuccessMessage('Producto actualizado correctamente');
+        
         setErrorMessage('');
       } else {
         setErrorMessage(response.data.message);
@@ -228,7 +252,7 @@ const CreateProduct = () => {
         <h1 className="h2">{editingProduct ? 'Editar Producto id: ' + editingProduct.id : 'Crear Producto'}</h1>
         {successMessage && <div className="alert alert-success">{successMessage}</div>}
         {errorMessage && <div className="alert alert-danger">{errorMessage}</div>}
-        <form className="form" onSubmit={editingProduct ? handleUpdateProduct : handleAddProduct}>
+        <form className="form" onSubmit={editingProduct ? handleUpdateProduct : confirmCreateProduct}>
           <div className="form-row">
             <div className="form-group">
               <label className="form-label">Categoría</label>
@@ -353,15 +377,16 @@ const CreateProduct = () => {
             </div>
 
             <div className="form-group">
-              <label className="form-label">Imágenes del Producto</label>
+            <label className="form-label">Imágenes del Producto</label>
               <div className="product-images">
                 {[0, 1, 2].map((index) => (
-                  <input
-                    key={index}
-                    type="file"
-                    accept="image/*"
-                    onChange={(e) => handleImageChange(index, e.target.files[0])}
-                  />
+                  <div key={index}>
+                    <input
+                      type="file"
+                      accept="image/*"
+                      onChange={(e) => handleImageChange(index, e.target.files[0])}
+                    />
+                  </div>
                 ))}
               </div>
             </div>

@@ -1,11 +1,15 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import './Orders.css';  // Asegúrate de crear este archivo para el estilo
+import { ListaOrden } from './ListaOrden';
 
 const Orders = () => {
     const [orders, setOrders] = useState([]);
     const [usuarios, setUsuarios] = useState([]);
     const [productos, setProductos] = useState([]);
+    const [estados, setEstados] = useState([]);
+    const [detalleOrden, setDetalleOrden] = useState([]);
+    const [idOrden, setIdOrden] = useState([]);
 
     useEffect(() => {
         const fetchOrders = async () => {
@@ -16,6 +20,16 @@ const Orders = () => {
                 console.error('Error fetching orders:', error);
             }
         };
+        
+        const fetchStatusOrders = async () => {
+            try {
+                const response = await axios.get('https://pro.dna.netlatin.net.ar/endpoints/E-Commerce/get_all_statusOrders.php');
+                setEstados(response.data);
+            } catch (error) {
+                console.error('Error fetching status orders:', error);
+            }
+        };
+
         const fetchProducts = async () => {
             try {
                 const response = await axios.get('https://pro.dna.netlatin.net.ar/endpoints/E-Commerce/get_all_productos.php');
@@ -24,9 +38,10 @@ const Orders = () => {
                 console.error('Error fetching products:', error);
             }
         };
+
         const fetchUsers = async () => {
             try {
-                const response = await axios.get('https://pro.dna.netlatin.net.ar/endpoints/E-Commerce/get_all_users_by_id.php');
+                const response = await axios.post('https://pro.dna.netlatin.net.ar/endpoints/E-Commerce/get_all_users_by_id.php');
                 setUsuarios(response.data);
             } catch (error) {
                 console.error('Error fetching users:', error);
@@ -34,19 +49,39 @@ const Orders = () => {
         };
 
         fetchOrders();
+        fetchStatusOrders();
         fetchProducts();
         fetchUsers();
     }, []);
 
-    const getProductNameById = (productId) => {
-        const product = productos.find((producto) => producto.id.toString() === productId);
-        console.log(product)
-        return product ? product.productname : 'Producto no encontrado';
+    const getEstadoNameById = (estadoId) => {
+        const estado = estados.find((estado) => estado.id === estadoId);
+        return estado ? estado.nombre_estado : 'Estado no encontrado';
     };
 
-    const getUserNameById = (userId) => {
-        const user = usuarios.find((user) => user.id === userId);
-        return user ? user.name : 'Usuario no encontrado';
+    const formatearFecha = (fecha) => {
+        const date = new Date(fecha);
+        const year = date.getFullYear();
+        const month = String(date.getMonth() + 1).padStart(2, '0');
+        const day = String(date.getDate()).padStart(2, '0');
+        const hours = String(date.getHours()).padStart(2, '0');
+        const minutes = String(date.getMinutes()).padStart(2, '0');
+        const seconds = String(date.getSeconds()).padStart(2, '0');
+        return `${year}-${month}-${day} ${hours}:${minutes}:${seconds}`;
+    };
+
+    const fetchOrdersList = async (id) => {
+        try {
+            const response = await axios.get(`https://pro.dna.netlatin.net.ar/endpoints/E-Commerce/get_detalles_orden.php?id=${id}`);
+            setDetalleOrden(response.data);
+        } catch (error) {
+            console.error('Error fetching orders:', error);
+        }
+    };
+
+    const handleDetalles = (id) => {
+        fetchOrdersList(id);
+        setIdOrden(id)
     };
 
     return (
@@ -57,24 +92,24 @@ const Orders = () => {
                     <thead>
                         <tr>
                             <th>ID de Orden</th>
-                            <th>Nombre del Producto</th>
-                            <th>Cantidad del Producto</th>
                             <th>Cliente</th>
+                            <th>N° de compra</th>
                             <th>Fecha</th>
                             <th>Estado de pedido</th>
-                            <th>Accion</th>
+                            <th>Acción</th>
                         </tr>
                     </thead>
                     <tbody>
                         {orders.map((orden) => (
                             <tr key={orden.id}>
                                 <td>{orden.id}</td>
-                                <td>{getProductNameById(orden.productid)}</td>
-                                <td>{orden.quantity}</td>
-                                <td>{getUserNameById(orden.userid)}</td>
-                                <td>{orden.orderdate}</td>
-                                <td>{orden.orderstatus}</td>
-                                <td>{}</td>
+                                <td>{orden.nombre}</td>
+                                <td>{orden.detalle_orden_id}</td>
+                                <td>{formatearFecha(orden.fechaorden)}</td>
+                                <td>{getEstadoNameById(orden.estado)}</td>
+                                <td>
+                                    <button onClick={() => handleDetalles(orden.id)}>Ver Detalles</button>
+                                </td>
                             </tr>
                         ))}
                     </tbody>
@@ -82,6 +117,7 @@ const Orders = () => {
             ) : (
                 <p>No hay órdenes disponibles</p>
             )}
+            <ListaOrden detalleOrden={detalleOrden} productos={productos} idOrden={idOrden}/>
         </div>
     );
 };

@@ -6,7 +6,7 @@ import './itemdetail.css';
 import { fetchProductById } from "../utils/endpoints";
 import {ImageCarousel}  from "../carousel/ImageCarousel";
 import ProductCarousel from "../carouselProd/ProductCarousel";
-import ProductImage from '../assets/imagenComponent/ProductImage'
+// import ProductImage from '../assets/imagenComponent/ProductImage'
 const ItemDetail = ({ item }) => {
   const [cantidad, setCantidad] = useState(1);
   const { agregarAlCarrito } = useContext(CartContext);

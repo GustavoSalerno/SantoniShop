@@ -31,11 +31,11 @@ const ItemCart = ({ carrito }) => {
                   <Link to={'/checkout'}>
                     <button className="action-btn">Comprar ahora</button>
                   </Link>
-                  {/* <div className="product-quantity-container">
+                  <div className="product-quantity-container">
                     <button className="quantity-btn">-</button>
                     <p>{producto.cantidad}</p>
                     <button className="quantity-btn">+</button>
-                  </div> */}
+                  </div>
                 </div>
               </div>
             </div>
