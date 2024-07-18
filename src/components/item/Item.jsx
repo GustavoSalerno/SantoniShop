@@ -27,7 +27,7 @@ const Item = ({ producto, idCategoria }) => {
       <div className="producto">
         <Link className="" to={`/item/${producto.id}`}>
         <div className="producto-image-container">
-        <img src={`../../assets/img/ProductList/${producto.id}/${producto.productimage1}`} alt={producto.productname} />
+        <img src={`../../assets/productimage/${producto.id}/${producto.productimage1}`} alt={producto.productname} />
         </div>
         </Link>
         <div className="producto-info">
