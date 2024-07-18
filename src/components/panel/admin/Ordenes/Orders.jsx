@@ -5,7 +5,10 @@ import { ListaOrden } from './ListaOrden';
 
 const Orders = () => {
     const [orders, setOrders] = useState([]);
+
     const [usuarios, setUsuarios] = useState([]);
+ console.log(usuarios)
+
     const [productos, setProductos] = useState([]);
     const [estados, setEstados] = useState([]);
     const [detalleOrden, setDetalleOrden] = useState([]);
@@ -54,10 +57,10 @@ const Orders = () => {
         fetchUsers();
     }, []);
 
-    const getEstadoNameById = (estadoId) => {
-        const estado = estados.find((estado) => estado.id === estadoId);
-        return estado ? estado.nombre_estado : 'Estado no encontrado';
-    };
+    // const getEstadoNameById = (estadoId) => {
+    //     const estado = estados.find((estado) => estado.id === estadoId);
+    //     return estado ? estado.nombre_estado : 'Estado no encontrado';
+    // };
 
     const formatearFecha = (fecha) => {
         const date = new Date(fecha);

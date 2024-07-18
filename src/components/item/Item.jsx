@@ -7,7 +7,7 @@ const Item = ({ producto, idCategoria }) => {
   // //console.log(producto); // Para verificar que producto es un objeto correcto
   const [nombreCategoria, setNombreCategoria ] = useState('');
   
-  //console.log(idCategoria)
+  console.log(nombreCategoria)
   useEffect(() => {
     const loadProduct = async () => {
       try {
@@ -28,7 +28,11 @@ const Item = ({ producto, idCategoria }) => {
       <div className="producto">
         <Link className="" to={`/item/${producto.id}`}>
         <div className="producto-image-container">
+
         <ProductImage producto={producto}/>
+
+        <img src={`../../../public/assets/productimages/${producto.id}/${producto.productimage1}`} alt={producto.productname} />
+
         </div>
         </Link>
         <div className="producto-info">
