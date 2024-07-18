@@ -38,7 +38,7 @@ function App() {
         {/* <ProductCarousel titulo={'Recomendados'}/> */}
       <div className="main-content">
       <Routes>
-        <Route path='/' element={<ItemListContainer />} />
+        <Route path='/SantoniShop' element={<ItemListContainer />} />
         <Route path='/item/:id' element={<ItemDetailContainer itemId={6} />}/>
         <Route path='/productos'element={<ItemListContainer />} />
         <Route path='/productos/:idcategoria'element={<ItemListContainer />} />
