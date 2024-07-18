@@ -118,8 +118,8 @@ const ItemDetail = ({ item }) => {
             </p>
             <p className="product-availability">Availability: In Stock</p>
             <div className="details-text">
-              <p className="descripcion"><strong>Descripción:</strong> {item.description}</p>
-              <p className="categoria">Categoria: {nombreCat}</p>
+              <p className="descripcion"><strong>Descripción:</strong> {item.productdescription}</p>
+              
             </div>
             <div className="product-quantity-container">
               <ItemCount

@@ -3,7 +3,6 @@ import axios from 'axios';
 import './products.css';
 import ProductList from './ProductsList';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import Swal from 'sweetalert2';
 
 const CreateProduct = () => {
   const [categories, setCategories] = useState([]);
@@ -16,18 +15,25 @@ const CreateProduct = () => {
   const [productPriceBeforeDiscount, setProductPriceBeforeDiscount] = useState('');
   const [productDescription, setProductDescription] = useState('');
   const [productImages, setProductImages] = useState([null, null, null]);
-  const [productImageUrls, setProductImageUrls] = useState(['', '', '']);
   const [shippingCharge, setShippingCharge] = useState(0);
   const [productAvailability, setProductAvailability] = useState('In Stock');
   const [stock, setStock] = useState(10);
   const [errorMessage, setErrorMessage] = useState('');
   const [successMessage, setSuccessMessage] = useState('');
   const [editingProduct, setEditingProduct] = useState(null);
-  const [showForm, setShowForm] = useState(false); // Estado para controlar la visibilidad del formulario
-
-
+  const [products, setProducts] = useState([]);
   useEffect(() => {
+    const fetchProducts = async () => {
+      try {
+        const response = await axios.get('https://pro.dna.netlatin.net.ar/endpoints/E-Commerce/get_all_productos.php');
+        setProducts(response.data);
+      } catch (error) {
+        console.error('Error fetching products:', error);
+        setErrorMessage('Error fetching products');
+      }
+    };
     fetchCategories();
+    fetchProducts();
   }, []);
 
   const fetchCategories = async () => {
@@ -39,42 +45,15 @@ const CreateProduct = () => {
       setErrorMessage('Error fetching categories');
     }
   };
-
-  const confirmCreateProduct = () => {
-    Swal.fire({
-      title: 'Producto Creado con exito',
-      text: 'Seguro que quieres crear el producto?',
-      icon: 'success',
-      showCancelButton: true,
-      confirmButtonColor: '#3085d6',
-      cancelButtonColor: '#d33',
-      confirmButtonText: 'Crear',
-      cancelButtonText: 'Cancelar'
-    }).then((result) => {
-      if (result.isConfirmed) {
-        handleAddProduct();
-        Swal.fire('Muy Bien', 'El producto ha sido Creado.', 'success');
-      }
-    });
+  const fetchProducts = async () => {
+    try {
+      const response = await axios.get('https://pro.dna.netlatin.net.ar/endpoints/E-Commerce/get_all_productos.php');
+      setProducts(response.data);
+    } catch (error) {
+      console.error('Error fetching products:', error);
+      setErrorMessage('Error fetching products');
+    }
   };
-  const confirmEditProduct = () => {
-    Swal.fire({
-      title: 'Producto Creado con exito',
-      text: 'Seguro que quieres crear el producto?',
-      icon: 'success',
-      showCancelButton: true,
-      confirmButtonColor: '#3085d6',
-      cancelButtonColor: '#d33',
-      confirmButtonText: 'Crear',
-      cancelButtonText: 'Cancelar'
-    }).then((result) => {
-      if (result.isConfirmed) {
-        handleAddProduct();
-        Swal.fire('Muy Bien', 'El producto ha sido Creado.', 'success');
-      }
-    });
-  };
-
   const fetchSubCategories = async (categoryId) => {
     try {
       const response = await axios.get(`https://pro.dna.netlatin.net.ar/endpoints/E-Commerce/joins/getNameSubCategorysById.php?id=${categoryId}`);
@@ -103,8 +82,10 @@ const CreateProduct = () => {
     });
   };
 
-  const handleAddProduct = async () => {
+  const handleFormSubmit = async (e, isEdit = false) => {
+    e.preventDefault();
     const formData = new FormData();
+    if (isEdit) formData.append('id', editingProduct.id);
     formData.append('category', selectedCategory);
     formData.append('subcategory', selectedSubCategory);
     formData.append('productname', productName);
@@ -115,41 +96,61 @@ const CreateProduct = () => {
     formData.append('shippingcharge', shippingCharge);
     formData.append('productavailability', productAvailability);
     formData.append('stock', stock);
+
+    let imagesChanged = false;
     productImages.forEach((image, index) => {
       if (image) {
         formData.append(`productimage${index + 1}`, image);
+        imagesChanged = true;
       }
     });
 
+    if (isEdit && !imagesChanged) {
+      formData.append('images_not_updated', 'true');
+    }
+
     try {
-      const response = await axios.post('https://pro.dna.netlatin.net.ar/endpoints/E-Commerce/abm/addProduct.php', formData, {
+      const endpoint = isEdit
+        ? 'https://pro.dna.netlatin.net.ar/endpoints/E-Commerce/abm/updateProduct.php'
+        : 'https://pro.dna.netlatin.net.ar/endpoints/E-Commerce/abm/addProduct.php';
+      const response = await axios.post(endpoint, formData, {
         headers: {
           'Content-Type': 'multipart/form-data',
         },
       });
+
       if (response.data.success) {
-        setSelectedCategory('');
-        setSelectedSubCategory('');
-        setProductName('');
-        setProductCompany('');
-        setProductPrice('');
-        setProductPriceBeforeDiscount('');
-        setProductDescription('');
-        setProductImages([null, null, null]);
-        setShippingCharge(0);
-        setProductAvailability('In Stock');
-        setStock(5);
-        setSuccessMessage('Producto agregado correctamente');
+        resetForm();
+        setSuccessMessage(isEdit ? 'Producto actualizado correctamente' : 'Producto creado correctamente');
         setErrorMessage('');
       } else {
         setErrorMessage(response.data.message);
         setSuccessMessage('');
       }
     } catch (error) {
-      console.error('Error adding product:', error);
-      setErrorMessage('Error al agregar el producto');
+      console.error('Error adding/updating product:', error);
+      setErrorMessage('Error al agregar/actualizar el producto');
       setSuccessMessage('');
     }
+  };
+
+  const resetForm = () => {
+    setSelectedCategory('');
+    setSelectedSubCategory('');
+    setProductName('');
+    setProductCompany('');
+    setProductPrice('');
+    setProductPriceBeforeDiscount('');
+    setProductDescription('');
+    setProductImages([null, null, null]);
+    setShippingCharge(0);
+    setProductAvailability('In Stock');
+    setStock(5);
+    setEditingProduct(null);
+  };
+
+  const handleCancelar = () => {
+    resetForm();
   };
 
   const handleEditProduct = (product) => {
@@ -164,104 +165,15 @@ const CreateProduct = () => {
     setShippingCharge(product.shippingcharge);
     setProductAvailability(product.productavailability);
     setStock(product.stock);
-    setProductImageUrls([
-      product.image1 ? `../../../assets/img/ProductList/${product.id}/productimage1.jpg` : '',
-      product.image2 ? `../../../assets/img/ProductList/${product.id}/productimage2.jpg` : '',
-      product.image3 ? `../../../assets/img/ProductList/${product.id}/productimage3.jpg` : ''
-    ]);
-    setShowForm(true); // Mostrar el formulario al editar un producto
-
-  };
-
-  const handleUpdateProduct = async (e) => {
-    e.preventDefault();
-
-    const formData = new FormData();
-    formData.append('id', editingProduct.id);
-    formData.append('category', selectedCategory);
-    formData.append('subcategory', selectedSubCategory);
-    formData.append('productname', productName);
-    formData.append('productcompany', productCompany);
-    formData.append('productprice', productPrice);
-    formData.append('productpricebeforediscount', productPriceBeforeDiscount);
-    formData.append('productdescription', productDescription);
-    formData.append('shippingcharge', shippingCharge);
-    formData.append('productavailability', productAvailability);
-    formData.append('stock', stock);
-    
-    let imagesChanged = false;
-    productImages.forEach((image, index) => {
-      if (image) {
-        formData.append(`productimage${index + 1}`, image);
-        imagesChanged = true;
-      }
-    });
-
-    // Add a flag to indicate that images are not being updated
-    if (!imagesChanged) {
-      formData.append('images_not_updated', 'true');
-    }
-
-    try {
-      const response = await axios.post('https://pro.dna.netlatin.net.ar/endpoints/E-Commerce/abm/updateProduct.php', formData, {
-        headers: {
-          'Content-Type': 'multipart/form-data',
-        },
-      });
-      if (response.data.success) {
-        setEditingProduct(null);
-        setSelectedCategory('');
-        setSelectedSubCategory('');
-        setProductName('');
-        setProductCompany('');
-        setProductPrice('');
-        setProductPriceBeforeDiscount('');
-        setProductDescription('');
-        setProductImages([null, null, null]);
-        setShippingCharge(0);
-        setProductAvailability('In Stock');
-        setStock(5);
-        
-        setErrorMessage('');
-        setShowForm(false); // Ocultar el formulario después de actualizar el producto
-
-      } else {
-        setErrorMessage(response.data.message);
-        setSuccessMessage('');
-      }
-    } catch (error) {
-      console.error('Error updating product:', error);
-      setErrorMessage('Error al actualizar el producto');
-      setSuccessMessage('');
-    }
-  };
-
-  const handleCancelar = () => {
-    setEditingProduct(null);
-    setSelectedCategory('');
-    setSelectedSubCategory('');
-    setProductName('');
-    setProductCompany('');
-    setProductPrice('');
-    setProductPriceBeforeDiscount('');
-    setProductDescription('');
-    setProductImages([null, null, null]);
-    setShippingCharge(0);
-    setProductAvailability('In Stock');
-    setStock(5);
   };
 
   return (
     <div>
-       <button className="btn btn-primary" onClick={() => setShowForm(!showForm)}>
-        {showForm ? 'Cerrar Formulario' : 'Agregar Producto'}
-      </button>
       <div className='container-pro'>
+        <h1 className="h2">{editingProduct ? `Editar Producto id: ${editingProduct.id}` : 'Crear Producto'}</h1>
         {successMessage && <div className="alert alert-success">{successMessage}</div>}
         {errorMessage && <div className="alert alert-danger">{errorMessage}</div>}
-        <h1 className="h2">{editingProduct ? 'Editar Producto id: ' + editingProduct.id : 'Crear Producto'}</h1>
-        {showForm && (
-        <form className="form" onSubmit={editingProduct ? handleUpdateProduct : confirmCreateProduct}>
+        <form className="form" onSubmit={(e) => handleFormSubmit(e, !!editingProduct)}>
           <div className="form-row">
             <div className="form-group">
               <label className="form-label">Categoría</label>
@@ -269,8 +181,7 @@ const CreateProduct = () => {
                 className="form-input"
                 value={selectedCategory}
                 onChange={handleCategoryChange}
-                
-                >
+              >
                 <option value="">Selecciona una categoría</option>
                 {categories.map((category) => (
                   <option key={category.id} value={category.id}>
@@ -286,7 +197,6 @@ const CreateProduct = () => {
                 className="form-input"
                 value={selectedSubCategory}
                 onChange={(e) => setSelectedSubCategory(e.target.value)}
-                
               >
                 <option value="">Selecciona una subcategoría</option>
                 {subcategories.map((subcategory) => (
@@ -304,7 +214,6 @@ const CreateProduct = () => {
                 type="text"
                 value={productName}
                 onChange={(e) => handleInputChange(e, setProductName)}
-                
               />
             </div>
 
@@ -315,7 +224,6 @@ const CreateProduct = () => {
                 type="text"
                 value={productCompany}
                 onChange={(e) => handleInputChange(e, setProductCompany)}
-                
               />
             </div>
 
@@ -326,10 +234,13 @@ const CreateProduct = () => {
                 type="number"
                 value={productPrice}
                 onChange={(e) => handleInputChange(e, setProductPrice)}
-                
               />
             </div>
-
+            
+                {/* _
+            .__(.)< (GUAU) 
+             \___)
+             ~~~~~~~~~~~~~~ */}
             <div className="form-group">
               <label className="form-label">Precio antes de Descuento</label>
               <input
@@ -346,7 +257,6 @@ const CreateProduct = () => {
                 className="form-input"
                 value={productDescription}
                 onChange={(e) => handleInputChange(e, setProductDescription)}
-                
               ></textarea>
             </div>
 
@@ -357,7 +267,6 @@ const CreateProduct = () => {
                 type="number"
                 value={shippingCharge}
                 onChange={(e) => handleInputChange(e, setShippingCharge)}
-                
               />
             </div>
 
@@ -367,7 +276,6 @@ const CreateProduct = () => {
                 className="form-input"
                 value={productAvailability}
                 onChange={(e) => handleInputChange(e, setProductAvailability)}
-                
               >
                 <option value="In Stock">En Stock</option>
                 <option value="Out of Stock">Fuera de Stock</option>
@@ -381,21 +289,19 @@ const CreateProduct = () => {
                 type="number"
                 value={stock}
                 onChange={(e) => handleInputChange(e, setStock)}
-                
               />
             </div>
 
             <div className="form-group">
-            <label className="form-label">Imágenes del Producto</label>
+              <label className="form-label">Imágenes del Producto</label>
               <div className="product-images">
                 {[0, 1, 2].map((index) => (
-                  <div key={index}>
-                    <input
-                      type="file"
-                      accept="image/*"
-                      onChange={(e) => handleImageChange(index, e.target.files[0])}
-                    />
-                  </div>
+                  <input
+                    key={index}
+                    type="file"
+                    accept="image/*"
+                    onChange={(e) => handleImageChange(index, e.target.files[0])}
+                  />
                 ))}
               </div>
             </div>
@@ -412,7 +318,6 @@ const CreateProduct = () => {
             </div>
           </div>
         </form>
-        )}
       </div>
       <ProductList onEditProduct={handleEditProduct} />
     </div>

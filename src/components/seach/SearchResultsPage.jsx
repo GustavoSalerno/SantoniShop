@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import Item from '../item/Item';
-import ProductCarousel from '../carouselProd/ProductCarousel';
+// import ProductCarousel from '../carouselProd/ProductCarousel';
 
 const SearchResultsPage = () => {
   const { query } = useParams();
