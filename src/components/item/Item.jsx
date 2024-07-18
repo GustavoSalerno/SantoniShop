@@ -31,7 +31,7 @@ const Item = ({ producto, idCategoria }) => {
 
         <ProductImage producto={producto}/>
 
-        <img src={`../../../public/assets/productimages/${producto.id}/${producto.productimage1}`} alt={producto.productname} />
+        {/* <img src={`../../../public/assets/productimages/${producto.id}/${producto.productimage1}`} alt={producto.productname} /> */}
 
         </div>
         </Link>
