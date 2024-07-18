@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { fetchProductById } from '../utils/endpoints'
+import ProductImage from '../assets/imagenComponent/ProductImage'
 import './item.css'
 const Item = ({ producto, idCategoria }) => {
   // //console.log(producto); // Para verificar que producto es un objeto correcto
@@ -21,14 +22,17 @@ const Item = ({ producto, idCategoria }) => {
     
     loadProduct();
   }, [idCategoria]);
-  
+
   return (
     producto && (
       <div className="producto">
         <Link className="" to={`/item/${producto.id}`}>
         <div className="producto-image-container">
-        {/* <img src={`../../assets/productimage/${producto.id}/${producto.productimage1}`} alt={producto.productname} /> */}
+
+        <ProductImage producto={producto}/>
+
         <img src={`../../../public/assets/productimages/${producto.id}/${producto.productimage1}`} alt={producto.productname} />
+
         </div>
         </Link>
         <div className="producto-info">

@@ -20,7 +20,8 @@ import './App.css'
 import { ImageCarousel } from "./components/carousel/ImageCarousel";
 import SearchResultsPage from "./components/seach/SearchResultsPage";
 import Footer from "./components/footer/Footer";
-import ProductCarousel from "./components/carouselProd/ProductCarousel";
+// import ProductCarousel from "./components/carouselProd/ProductCarousel";
+import AdminPanel from "./components/panel/admin/AdminPanel";
 
 // import { Contacto } from "./components/navbar/ContactoSimple";
 function App() {
@@ -47,10 +48,12 @@ function App() {
         <Route path='/nosotros'element={<Nosotros />} />
         <Route path="/search/:query" element={<SearchResultsPage />} /> {/* Add the search results page route */}
 
-        {/* <Route path='/contacto'element={<ContactoIntermedio />} /> */}
         <Route path='/contacto'element={<ContactoAvanzado />} />
         <Route path='/carrito'element={<Carrito />} />
         <Route path='/checkout'element={<Checkout />} />
+        <Route path="/admin/*" element={<AdminPanel />} />
+
+
         </Routes>  
         </div>
         </div>

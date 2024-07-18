@@ -22,6 +22,7 @@ const CreateProduct = () => {
   const [successMessage, setSuccessMessage] = useState('');
   const [editingProduct, setEditingProduct] = useState(null);
   const [products, setProducts] = useState([]);
+  console.log(products)  
   useEffect(() => {
     const fetchProducts = async () => {
       try {
@@ -45,15 +46,7 @@ const CreateProduct = () => {
       setErrorMessage('Error fetching categories');
     }
   };
-  const fetchProducts = async () => {
-    try {
-      const response = await axios.get('https://pro.dna.netlatin.net.ar/endpoints/E-Commerce/get_all_productos.php');
-      setProducts(response.data);
-    } catch (error) {
-      console.error('Error fetching products:', error);
-      setErrorMessage('Error fetching products');
-    }
-  };
+
   const fetchSubCategories = async (categoryId) => {
     try {
       const response = await axios.get(`https://pro.dna.netlatin.net.ar/endpoints/E-Commerce/joins/getNameSubCategorysById.php?id=${categoryId}`);
@@ -237,10 +230,7 @@ const CreateProduct = () => {
               />
             </div>
             
-            {/* _
-            .__(.)< (GUAU) 
-             \___)
-             ~~~~~~~~~~~~~~ */}
+              
             <div className="form-group">
               <label className="form-label">Precio antes de Descuento</label>
               <input
