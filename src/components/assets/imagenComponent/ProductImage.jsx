@@ -2,7 +2,7 @@ import React from 'react';
 import './ProductImage.css'
 
 const ProductoImagen = ({ producto , clas = null }) => {
-    const imagePath = `../../../public/assets/productimages/${producto.id}/${producto.productimage1}`; 
+    const imagePath = `../../../assets/productimages/${producto.id}/${producto.productimage1}`; 
 if (clas!=null){
     clas = 'image-container-list'
 }
