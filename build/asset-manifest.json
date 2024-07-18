@@ -1,7 +1,7 @@
 {
   "files": {
     "main.css": "/SantoniShop/static/css/main.f6f0a4b6.css",
-    "main.js": "/SantoniShop/static/js/main.a234dcb7.js",
+    "main.js": "/SantoniShop/static/js/main.20993a5a.js",
     "static/media/logo.jpg": "/SantoniShop/static/media/logo.5ecef395f9449ae27d08.jpg",
     "static/media/3.jpg": "/SantoniShop/static/media/3.e43336b5dffcb790f0f0.jpg",
     "static/media/4.jpg": "/SantoniShop/static/media/4.7f2c05eea75d7504de08.jpg",
@@ -9,10 +9,10 @@
     "static/media/2.jpg": "/SantoniShop/static/media/2.7a1dde60eb96674bcf7d.jpg",
     "index.html": "/SantoniShop/index.html",
     "main.f6f0a4b6.css.map": "/SantoniShop/static/css/main.f6f0a4b6.css.map",
-    "main.a234dcb7.js.map": "/SantoniShop/static/js/main.a234dcb7.js.map"
+    "main.20993a5a.js.map": "/SantoniShop/static/js/main.20993a5a.js.map"
   },
   "entrypoints": [
     "static/css/main.f6f0a4b6.css",
-    "static/js/main.a234dcb7.js"
+    "static/js/main.20993a5a.js"
   ]
 }
