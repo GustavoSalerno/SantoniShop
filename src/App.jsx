@@ -20,7 +20,7 @@ import './App.css'
 import { ImageCarousel } from "./components/carousel/ImageCarousel";
 import SearchResultsPage from "./components/seach/SearchResultsPage";
 import Footer from "./components/footer/Footer";
-import ProductCarousel from "./components/carouselProd/ProductCarousel";
+// import ProductCarousel from "./components/carouselProd/ProductCarousel";
 
 // import { Contacto } from "./components/navbar/ContactoSimple";
 function App() {

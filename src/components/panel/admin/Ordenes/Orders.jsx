@@ -5,7 +5,7 @@ import { ListaOrden } from './ListaOrden';
 
 const Orders = () => {
     const [orders, setOrders] = useState([]);
-    const [usuarios, setUsuarios] = useState([]);
+    // const [usuarios, setUsuarios] = useState([]);
     const [productos, setProductos] = useState([]);
     const [estados, setEstados] = useState([]);
     const [detalleOrden, setDetalleOrden] = useState([]);
@@ -39,25 +39,25 @@ const Orders = () => {
             }
         };
 
-        const fetchUsers = async () => {
-            try {
-                const response = await axios.post('https://pro.dna.netlatin.net.ar/endpoints/E-Commerce/get_all_users_by_id.php');
-                setUsuarios(response.data);
-            } catch (error) {
-                console.error('Error fetching users:', error);
-            }
-        };
+        // const fetchUsers = async () => {
+        //     try {
+        //         const response = await axios.post('https://pro.dna.netlatin.net.ar/endpoints/E-Commerce/get_all_users_by_id.php');
+        //         setUsuarios(response.data);
+        //     } catch (error) {
+        //         console.error('Error fetching users:', error);
+        //     }
+        // };
 
         fetchOrders();
         fetchStatusOrders();
         fetchProducts();
-        fetchUsers();
+        // fetchUsers();
     }, []);
 
-    const getEstadoNameById = (estadoId) => {
-        const estado = estados.find((estado) => estado.id === estadoId);
-        return estado ? estado.nombre_estado : 'Estado no encontrado';
-    };
+    // const getEstadoNameById = (estadoId) => {
+    //     const estado = estados.find((estado) => estado.id === estadoId);
+    //     return estado ? estado.nombre_estado : 'Estado no encontrado';
+    // };
 
     const formatearFecha = (fecha) => {
         const date = new Date(fecha);

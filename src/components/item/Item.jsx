@@ -6,7 +6,7 @@ const Item = ({ producto, idCategoria }) => {
   // //console.log(producto); // Para verificar que producto es un objeto correcto
   const [nombreCategoria, setNombreCategoria ] = useState('');
   
-  //console.log(idCategoria)
+  console.log(nombreCategoria)
   useEffect(() => {
     const loadProduct = async () => {
       try {
