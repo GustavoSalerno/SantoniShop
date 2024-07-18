@@ -23,6 +23,7 @@ const CreateProduct = () => {
   const [errorMessage, setErrorMessage] = useState('');
   const [successMessage, setSuccessMessage] = useState('');
   const [editingProduct, setEditingProduct] = useState(null);
+  const [showForm, setShowForm] = useState(false); // Estado para controlar la visibilidad del formulario
 
 
   useEffect(() => {
@@ -168,6 +169,8 @@ const CreateProduct = () => {
       product.image2 ? `../../../assets/img/ProductList/${product.id}/productimage2.jpg` : '',
       product.image3 ? `../../../assets/img/ProductList/${product.id}/productimage3.jpg` : ''
     ]);
+    setShowForm(true); // Mostrar el formulario al editar un producto
+
   };
 
   const handleUpdateProduct = async (e) => {
@@ -220,6 +223,8 @@ const CreateProduct = () => {
         setStock(5);
         
         setErrorMessage('');
+        setShowForm(false); // Ocultar el formulario después de actualizar el producto
+
       } else {
         setErrorMessage(response.data.message);
         setSuccessMessage('');
@@ -248,10 +253,14 @@ const CreateProduct = () => {
 
   return (
     <div>
+       <button className="btn btn-primary" onClick={() => setShowForm(!showForm)}>
+        {showForm ? 'Cerrar Formulario' : 'Agregar Producto'}
+      </button>
       <div className='container-pro'>
-        <h1 className="h2">{editingProduct ? 'Editar Producto id: ' + editingProduct.id : 'Crear Producto'}</h1>
         {successMessage && <div className="alert alert-success">{successMessage}</div>}
         {errorMessage && <div className="alert alert-danger">{errorMessage}</div>}
+        <h1 className="h2">{editingProduct ? 'Editar Producto id: ' + editingProduct.id : 'Crear Producto'}</h1>
+        {showForm && (
         <form className="form" onSubmit={editingProduct ? handleUpdateProduct : confirmCreateProduct}>
           <div className="form-row">
             <div className="form-group">
@@ -261,7 +270,7 @@ const CreateProduct = () => {
                 value={selectedCategory}
                 onChange={handleCategoryChange}
                 
-              >
+                >
                 <option value="">Selecciona una categoría</option>
                 {categories.map((category) => (
                   <option key={category.id} value={category.id}>
@@ -403,6 +412,7 @@ const CreateProduct = () => {
             </div>
           </div>
         </form>
+        )}
       </div>
       <ProductList onEditProduct={handleEditProduct} />
     </div>

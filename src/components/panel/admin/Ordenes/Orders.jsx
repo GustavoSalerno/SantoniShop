@@ -81,7 +81,22 @@ const Orders = () => {
 
     const handleDetalles = (id) => {
         fetchOrdersList(id);
-        setIdOrden(id)
+        setIdOrden(id);
+    };
+
+    const handleStatusChange = async (orderId, newStatus) => {
+        try {
+            await axios.put(`https://pro.dna.netlatin.net.ar/endpoints/E-Commerce/abm/update_order_status.php`, {
+                id: orderId,
+                estado: newStatus
+            });
+            // Actualiza el estado localmente después de una actualización exitosa
+            setOrders(orders.map(order => 
+                order.id === orderId ? { ...order, estado: newStatus } : order
+            ));
+        } catch (error) {
+            console.error('Error updating order status:', error);
+        }
     };
 
     return (
@@ -106,7 +121,18 @@ const Orders = () => {
                                 <td>{orden.nombre}</td>
                                 <td>{orden.detalle_orden_id}</td>
                                 <td>{formatearFecha(orden.fechaorden)}</td>
-                                <td>{getEstadoNameById(orden.estado)}</td>
+                                <td>
+                                    <select 
+                                        value={orden.estado} 
+                                        onChange={(e) => handleStatusChange(orden.id, e.target.value)}
+                                    >
+                                        {estados.map((estado) => (
+                                            <option key={estado.id} value={estado.id}>
+                                                {estado.nombre_estado}
+                                            </option>
+                                        ))}
+                                    </select>
+                                </td>
                                 <td>
                                     <button onClick={() => handleDetalles(orden.id)}>Ver Detalles</button>
                                 </td>

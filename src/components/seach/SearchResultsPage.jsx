@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import Item from '../item/Item';
+import ProductCarousel from '../carouselProd/ProductCarousel';
 
 const SearchResultsPage = () => {
   const { query } = useParams();
@@ -26,15 +27,15 @@ console.log(query)
       {results.length > 0 ? (
         <ul>
           {results.map((result) => (
+
          <Item key={result.id} producto={result} />
-         // <li key={result.id}>
-            //   {result.productname} - ${result.productprice}
-            // </li>
-          ))}
+        ))}
+        
         </ul>
       ) : (
         <p>No se encontraron resultados.</p>
       )}
+      {/* <ProductCarousel productos={results}/> */}
     </div>
   );
 };

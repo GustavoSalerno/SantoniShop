@@ -5,45 +5,56 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import { CartContext } from '../context/CartContext';
 
 const ItemCart = ({ carrito }) => {
-  const { eliminarDelCarrito } = useContext(CartContext);
+  const { eliminarDelCarrito, vaciarCarrito } = useContext(CartContext);
+
+  const handleVaciar = () => {
+    vaciarCarrito();
+  };
+
+  // Calcular el total del carrito teniendo en cuenta las cantidades
+  const totalCarrito = carrito.reduce((total, producto) => total + producto.productprice * producto.cantidad, 0);
+  const tosCarrito = carrito.reduce((total, producto) => total + producto.cantidad , 0);
 
   return (
     <div className="cart-items-container">
+      <div className="store-header">
+        <h2>Casa Santoni</h2>
+        <p>Tienda Oficial</p>
+      </div>
       {carrito && carrito.length > 0 ? (
         carrito.map((producto, index) => {
           const imageUrl = `/assets/productimages/${producto.id}/${producto.productimage1}`;
-          console.log(imageUrl); // Verifica la URL en la consola
-
           return (
             <div key={index} className="producto">
-              <div className="producto-image-container">
+              <div className="producto-image-container2">
                 <img src={imageUrl} alt={producto.productname} />
               </div>
               <div className="producto-info">
-                <Link className="" to={`/item/${producto.id}`}>
-                  <h4 className="producto-price2">{producto.productname}</h4>
-                  <h4 className="producto-price2">{producto.productdescription}</h4>
+                <Link to={`/item/${producto.id}`}>
+                  <h4 className="producto-name">{producto.productname}</h4>
                 </Link>
+                <p className="producto-description">{producto.productdescription}</p>
+                <p className="producto-cantidad">Cantidad: {producto.cantidad}</p>
                 <p className="producto-price">Precio: ${producto.productprice}</p>
                 <div className="producto-actions">
                   <button className='action-btn' onClick={() => eliminarDelCarrito(producto.id)}>Eliminar</button>
-                  {/* <button className="action-btn">Guardar</button> */}
-                  <Link to={'/checkout'}>
-                    <button className="action-btn">Comprar ahora</button>
-                  </Link>
-                  <div className="product-quantity-container">
-                    <button className="quantity-btn">-</button>
-                    <p>{producto.cantidad}</p>
-                    <button className="quantity-btn">+</button>
-                  </div>
                 </div>
               </div>
             </div>
           );
         })
       ) : (
-        <p>El carrito está vacío.</p>
+        <p className="empty-cart-message">El carrito está vacío.</p>
       )}
+      <div className="summary-container">
+        <h3>Resumen de compra</h3>
+        {/* <p>Productos ({carrito.length})</p> */}
+        <p>Productos ({tosCarrito})</p>
+        <p>Envío: Gratis</p>
+        <p>Total: ${totalCarrito}</p>
+        <Link to={'/checkout'}><button className="checkout-btn" style={{marginRight:'13px'}}>Finalizar compra</button></Link>
+        <button className="checkout-btn" onClick={handleVaciar}>Vaciar Carrito</button>
+      </div>
     </div>
   );
 };

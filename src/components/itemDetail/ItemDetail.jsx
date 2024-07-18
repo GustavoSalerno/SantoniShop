@@ -79,16 +79,16 @@ const ItemDetail = ({ item }) => {
     loadProduct();
   }, [idCategoria]);
 
-  // const formatDescription = (description) => {
-  //   const regex = /<li.*?>(.*?)<\/li>/g;
-  //   const matches = description.matchAll(regex);
-  //   const formattedDescription = Array.from(matches).map(
-  //     (match) => match[1]
-  //   );
-  //   return formattedDescription;
-  // };
+  const formatDescription = (description) => {
+    const regex = /<li.*?>(.*?)<\/li>/g;
+    const matches = description.matchAll(regex);
+    const formattedDescription = Array.from(matches).map(
+      (match) => match[1]
+    );
+    return formattedDescription;
+  };
 
-  // const formattedDescription = formatDescription(item.productdescription);
+  const formattedDescription = formatDescription(item.productdescription);
 
   return (
     <div>
@@ -129,7 +129,7 @@ const ItemDetail = ({ item }) => {
                 handleSumar={handleSumar}
               />
             </div>
-            {/* <button className="add-to-cart" onClick={() => agregarAlCarrito(item, cantidad)}>Add to cart</button> */}
+            <button className="add-to-cart" onClick={() => agregarAlCarrito(item, cantidad)}>Agregar al carrito</button>
           </div>
         </div>
       </div>
@@ -141,6 +141,7 @@ const ItemDetail = ({ item }) => {
       <ImageCarousel /> 
       </div>
       <br />
+      {console.log(productos)}
       {productos &&
         <ProductCarousel productos={productos} titulo={titulo}/>
       }
