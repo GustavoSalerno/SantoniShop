@@ -6,7 +6,6 @@ import SubCategories from "./AbmSubCategorias/SubCategories";
 import Orders from "./Ordenes/Orders";
 import "./AdminPanel.css";
 import Registro from "../../registroUsuarios/Registro";
-import Invoice from "./factura/Invoice";
 
 const AdminPanel = () => {
   return (
