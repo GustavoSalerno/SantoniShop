@@ -162,7 +162,7 @@ const Checkout = () => {
     };
 
     const generarMensajeWhatsApp = () => {
-        let mensaje = "Hola, me gustaría saber mas sobre los siguientes productos:\n\n";
+        let mensaje = "Hola, me gustaría saber mas sobre sobre:\n\n";
         carrito.forEach(item => {
             mensaje += `Producto: ${item.productname}\nCantidad: ${item.cantidad}\nPrecio: ${item.productprice}\n\n`;
         });
