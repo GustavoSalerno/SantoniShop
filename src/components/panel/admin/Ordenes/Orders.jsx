@@ -23,7 +23,7 @@ const Orders = () => {
                 console.error('Error fetching orders:', error);
             }
         };
-        
+    
         const fetchStatusOrders = async () => {
             try {
                 const response = await axios.get('https://pro.dna.netlatin.net.ar/endpoints/E-Commerce/get_all_statusOrders.php');
@@ -111,6 +111,7 @@ const Orders = () => {
                         <tr>
                             <th>ID de Orden</th>
                             <th>Cliente</th>
+                            <th>telefono</th>
                             <th>N° de compra</th>
                             <th>Fecha</th>
                             <th>Estado de pedido</th>
@@ -122,6 +123,7 @@ const Orders = () => {
                             <tr key={orden.id}>
                                 <td>{orden.id}</td>
                                 <td>{orden.nombre}</td>
+                                <td>{orden.telefono}</td>
                                 <td>{orden.detalle_orden_id}</td>
                                 <td>{formatearFecha(orden.fechaorden)}</td>
                                 <td>

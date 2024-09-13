@@ -154,15 +154,17 @@ const generatePDF = (orderDetails, detalleOrden,datos) => {
         margin: { left: marginLeft - 4.5, right: marginLeft -4.5},
         theme: 'striped',
     });
+
     doc.setFontSize(16);
     doc.setFont('helvetica', 'bold');
-    const total = detalleOrden.reduce((sum, detalle) => sum + detalle.cantidad * productprice, 0);
+    const total = orderDetails.reduce((sum, detalle) => sum + detalle.cantidad * detalle.productprice, 0);
+
     doc.text(`Total a pagar:`, marginLeft + 110, doc.previousAutoTable.finalY + 105);
     doc.setFont('helvetica', 'normal');
     doc.setFontSize(14);
+    console.log(total);
     doc.text(`$ ${total.toFixed(2)}`, marginLeft + 150, doc.previousAutoTable.finalY + 105);
     
-    console.log(doc.previousAutoTable.finalY + 100);
     doc.line(marginLeft -5 , doc.previousAutoTable.finalY + 98, pageWidth - marginLeft +5, doc.previousAutoTable.finalY + 98);
     doc.line(marginLeft -5 , doc.previousAutoTable.finalY + 110, pageWidth - marginLeft +5, doc.previousAutoTable.finalY + 110);
     doc.line(marginLeft -5 , marginTop + 270, pageWidth - marginLeft +5, marginTop + 270);
