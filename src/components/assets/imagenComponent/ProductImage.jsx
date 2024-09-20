@@ -3,7 +3,7 @@ import './ProductImage.css'
 
 const ProductoImagen = ({ producto , clas = null }) => {
     // const imagePath = `../../../assets/productimages/${producto.id}/${producto.productimage1}`; 
-    const imagePath = `../../../../public/assets/productimages/${producto.id}/${producto.productimage1}`;
+    const imagePath = `https://kiosco.dnatech.com.ar/assets/productimages/${producto.id}/${producto.productimage1}`;
     
 
 if (clas!=null){
