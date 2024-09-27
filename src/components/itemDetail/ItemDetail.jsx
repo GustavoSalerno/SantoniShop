@@ -64,7 +64,7 @@ const ItemDetail = ({ item }) => {
     item.productimage3
   ].filter(image => image);
 
-  const imagePath = (image) => `../../../assets/productimages/${item.id}/${image}`;
+  const imagePath = (image) => `/assets/productimages/${item.id}/${image}`;
   const idCategoria = item.subcategory;
   useEffect(() => {
     const loadProduct = async () => {
